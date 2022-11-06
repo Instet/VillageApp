@@ -37,7 +37,7 @@ final class FirstEnterViewController: UIViewController {
                          registationButton,
                          logInButton)
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.topBigIndent),
+            image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.topIndentFive),
             image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             image.widthAnchor.constraint(equalToConstant: view.frame.width - Constants.totalIndent),
             image.heightAnchor.constraint(equalTo: image.widthAnchor),
@@ -46,10 +46,10 @@ final class FirstEnterViewController: UIViewController {
             registationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.bigLeadingIndent),
             registationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.bigTrailingIndent
                                                        ),
-            registationButton.topAnchor.constraint(equalTo: image.bottomAnchor, constant: Constants.topBigIndent),
+            registationButton.topAnchor.constraint(equalTo: image.bottomAnchor, constant: Constants.topIndentFive),
             registationButton.heightAnchor.constraint(equalToConstant: Constants.heightStandart),
 
-            logInButton.topAnchor.constraint(equalTo: registationButton.bottomAnchor, constant: Constants.topIndent),
+            logInButton.topAnchor.constraint(equalTo: registationButton.bottomAnchor, constant: Constants.topIndentFour),
             logInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

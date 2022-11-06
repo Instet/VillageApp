@@ -11,6 +11,8 @@ final class RegistrationViewController: UIViewController {
 
     private let viewElements: ViewElements = ViewElements.shared
 
+    private var numberPhone: String = ""
+
     private lazy var registrationLabel = viewElements.getLabel(text: .registrationString,
                                                                size: 18,
                                                                textColor: UIColor(.mainColor)!,
@@ -43,7 +45,6 @@ final class RegistrationViewController: UIViewController {
     private lazy var numberTextField: UITextField = {
         let textField = viewElements.getTextFieldForPhone(placeholder: "+7(___)___-__-__")
         textField.delegate = self
-        textField.addTarget(self, action: #selector(endEdit), for: .touchUpInside)
         return textField
     }()
 
@@ -63,13 +64,13 @@ final class RegistrationViewController: UIViewController {
                          numberTextField, nextAppButton, privacyPolicyLabel)
 
         NSLayoutConstraint.activate([
-            registrationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.topBigIndent),
+            registrationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.topIndentFive),
             registrationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            enterNumbelLabel.topAnchor.constraint(equalTo: registrationLabel.bottomAnchor, constant: Constants.veryBigTopIndent),
+            enterNumbelLabel.topAnchor.constraint(equalTo: registrationLabel.bottomAnchor, constant: Constants.topIndentSeven),
             enterNumbelLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            secondNumerLabel.topAnchor.constraint(equalTo: enterNumbelLabel.bottomAnchor, constant: Constants.miniTopIndent),
+            secondNumerLabel.topAnchor.constraint(equalTo: enterNumbelLabel.bottomAnchor, constant: Constants.topIndentOne),
             secondNumerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             secondNumerLabel.widthAnchor.constraint(equalToConstant: view.frame.width - Constants.bigTotalIndent),
 
@@ -78,14 +79,14 @@ final class RegistrationViewController: UIViewController {
             numberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.bigTrailingIndent),
             numberTextField.heightAnchor.constraint(equalToConstant: Constants.heightStandart),
 
-            nextAppButton.topAnchor.constraint(equalTo: numberTextField.bottomAnchor, constant: Constants.veryBigTopIndent),
+            nextAppButton.topAnchor.constraint(equalTo: numberTextField.bottomAnchor, constant: Constants.topIndentSeven),
             nextAppButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextAppButton.heightAnchor.constraint(equalToConstant: Constants.heightStandart),
-            nextAppButton.widthAnchor.constraint(equalToConstant: Constants.nextWeight),
+            nextAppButton.widthAnchor.constraint(equalToConstant: Constants.uniIndentBig),
 
-            privacyPolicyLabel.topAnchor.constraint(equalTo: nextAppButton.bottomAnchor, constant: Constants.indentNextTop),
+            privacyPolicyLabel.topAnchor.constraint(equalTo: nextAppButton.bottomAnchor, constant: Constants.topIndentThree),
             privacyPolicyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            privacyPolicyLabel.widthAnchor.constraint(equalToConstant: view.frame.width - Constants.nextWeight)
+            privacyPolicyLabel.widthAnchor.constraint(equalToConstant: view.frame.width - Constants.uniIndentBig)
         ])
     }
 
@@ -106,5 +107,13 @@ final class RegistrationViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension RegistrationViewController: UITextFieldDelegate {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return false}
+        let newString = (text as NSString).replacingCharacters(in: range, with: string)
+        textField.text = String.formatPhoneNumber(number: newString, mask: "+_(___)___-__-__")
+        numberPhone = "+" + newString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        return false
+    }
 
 }
