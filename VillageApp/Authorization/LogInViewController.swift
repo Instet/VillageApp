@@ -7,7 +7,9 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, ViewAuthorisationProtocol {
+
+    var presenter: AuthorisationPresenterProtocol?
 
     private let viewElements: ViewElements = ViewElements.shared
 

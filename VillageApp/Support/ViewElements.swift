@@ -60,6 +60,20 @@ final class ViewElements {
         return label
     }
 
+    func getLabel(textString: String,
+                  size: CGFloat,
+                  textColor: UIColor = .black,
+                  weight: UIFont.Weight = .regular,
+                  textAlignment: NSTextAlignment = .center) -> UILabel {
+        let label = UILabel()
+        label.text = textString
+        label.font = .systemFont(ofSize: size, weight: weight)
+        label.textAlignment = textAlignment
+        label.textColor = textColor
+        label.numberOfLines = 0
+        return label
+    }
+
     /// add system picture
     func getSystemImage(image: String) -> UIImageView {
         let imageView = UIImageView()
@@ -83,7 +97,19 @@ final class ViewElements {
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(.mainColor)?.cgColor
-        textField.keyboardType = .phonePad
+        textField.keyboardType = .namePhonePad
+        return textField
+    }
+
+    func getTextFieldForReg(placeholder: String) -> UITextField {
+        let textField = UITextField()
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.textColor = .black
+        textField.placeholder = placeholder
+        textField.layer.cornerRadius = 8
+        textField.backgroundColor = UIColor(.backgraundCell)
+        textField.keyboardType = .default
         return textField
     }
 

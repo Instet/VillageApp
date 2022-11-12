@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class FirstEnterViewController: UIViewController {
+final class FirstEnterViewController: UIViewController, ViewAuthorisationProtocol {
+    
+    var presenter: AuthorisationPresenterProtocol?
+    var coordinator: CoordinatorProtocol?
 
     private let viewElements: ViewElements = ViewElements.shared
 
@@ -56,12 +59,11 @@ final class FirstEnterViewController: UIViewController {
 
 
     @objc private func registrationAction() {
-        print(#function)
-
+        coordinator?.regView()
     }
 
     @objc private func logInAction() {
-        print(#function)
+        coordinator?.logInView()
 
     }
 

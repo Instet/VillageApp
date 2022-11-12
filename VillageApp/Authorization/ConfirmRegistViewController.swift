@@ -7,16 +7,24 @@
 
 import UIKit
 
-final class ConfirmRegistViewController: UIViewController {
+final class ConfirmRegistViewController: UIViewController, ViewAuthorisationProtocol {
+
+    var presenter: AuthorisationPresenterProtocol?
 
     private let viewElements: ViewElements = ViewElements.shared
 
     private var phoneCode: String = ""
+    var phone = ""
 
     private lazy var confirmLabel = viewElements.getLabel(text: .confirmRegString,
                                                           size: 18,
                                                           textColor: UIColor(.orange)!,
                                                           weight: .bold)
+    private lazy var labelPhone = viewElements.getLabel(textString: phone,
+                                                        size: 14,
+                                                        textColor: .black,
+                                                        weight: .semibold)
+
     private lazy var secondConfirm = viewElements.getLabel(text: .smsString,
                                                            size: 14,
                                                            textColor: UIColor(.mainColor)!,
@@ -45,13 +53,15 @@ final class ConfirmRegistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        
+
         let gesture = UITapGestureRecognizer(target: self, action: #selector(endEdit))
         view.addGestureRecognizer(gesture)
     }
 
     private func setupLayout() {
         view.backgroundColor = .systemBackground
-        view.addSubviews(confirmLabel, secondConfirm, enterSMSLabel,
+        view.addSubviews(confirmLabel, secondConfirm, labelPhone, enterSMSLabel,
                          codeTextField, registationButton, image)
 
         NSLayoutConstraint.activate([
@@ -62,7 +72,10 @@ final class ConfirmRegistViewController: UIViewController {
             secondConfirm.topAnchor.constraint(equalTo: confirmLabel.bottomAnchor, constant: Constants.topIndentTwo),
             secondConfirm.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            enterSMSLabel.topAnchor.constraint(equalTo: secondConfirm.bottomAnchor, constant: Constants.indent),
+            labelPhone.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelPhone.topAnchor.constraint(equalTo: secondConfirm.bottomAnchor, constant: Constants.topIndentOne),
+
+            enterSMSLabel.topAnchor.constraint(equalTo: labelPhone.bottomAnchor, constant: Constants.indent),
             enterSMSLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.bigLeadingIndent),
 
             codeTextField.topAnchor.constraint(equalTo: enterSMSLabel.bottomAnchor, constant: Constants.topIndentOne),
@@ -83,7 +96,7 @@ final class ConfirmRegistViewController: UIViewController {
     
 
     @objc private func registrationConfirmAction() {
-        print(#function)
+        presenter?.checkVerificationID(verificationCode: phoneCode)
     }
 
     @objc private func endEdit() {
@@ -99,7 +112,7 @@ extension ConfirmRegistViewController: UITextFieldDelegate {
         guard let text = textField.text else { return false}
         let newString = (text as NSString).replacingCharacters(in: range, with: string)
         textField.text = String.formatPhoneNumber(number: newString, mask: "___-___")
-        phoneCode = "+" + newString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        phoneCode = newString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         return false
     }
     

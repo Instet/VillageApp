@@ -21,5 +21,11 @@ enum StringSet: String {
     case greatingString = "С возвращением"
     case enterNumberForApp = "Введите номер телефона для входа в приложение"
     case confirmString = "Подтвердить"
+    case noNameString = "No Name"
+    case name = "Имя"
+    case lastName = "Фамилия"
+    case gender = "Пол"
+    case birthday = "Дата рождения"
+    case city = "Родной город"
 
 }

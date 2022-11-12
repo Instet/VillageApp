@@ -13,6 +13,8 @@ struct Constants {
     static var heightStandart: CGFloat = 50
     /// constant: 120
     static var uniIndentBig: CGFloat = 120
+    /// constant: 40
+    static var heightRegTF: CGFloat = 40
 
 
 
@@ -38,6 +40,10 @@ struct Constants {
     static var topIndentSeven: CGFloat = 70
     /// constant: 16
     static var indent: CGFloat = 16
+    /// constant: 14
+    static var topReg: CGFloat = 14
+    /// constant: 10
+    static var genderTop: CGFloat = 10
 
 
     // MARK: - Leading indents
@@ -46,6 +52,8 @@ struct Constants {
     static var leadingIndent: CGFloat = 16
     /// constant: 60
     static var bigLeadingIndent: CGFloat = 60
+    /// constant: 25
+    static var normalLeadingIndent: CGFloat = 25
 
     // MARK: - Trailing indents
 

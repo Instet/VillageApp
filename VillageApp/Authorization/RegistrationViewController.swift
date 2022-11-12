@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController, ViewAuthorisationProtocol {
+    
+    var presenter: AuthorisationPresenterProtocol?
 
     private let viewElements: ViewElements = ViewElements.shared
-
-    private var numberPhone: String = ""
 
     private lazy var registrationLabel = viewElements.getLabel(text: .registrationString,
                                                                size: 18,
@@ -93,7 +93,8 @@ final class RegistrationViewController: UIViewController {
 
 
     @objc private func nextAppAction() {
-        print(#function)
+        guard let numberPhone = numberTextField.text else { return }
+        presenter?.registrationUser(phone: numberPhone)
     }
 
     
@@ -112,7 +113,6 @@ extension RegistrationViewController: UITextFieldDelegate {
         guard let text = textField.text else { return false}
         let newString = (text as NSString).replacingCharacters(in: range, with: string)
         textField.text = String.formatPhoneNumber(number: newString, mask: "+_(___)___-__-__")
-        numberPhone = "+" + newString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         return false
     }
 
