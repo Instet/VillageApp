@@ -27,5 +27,9 @@ enum StringSet: String {
     case gender = "Пол"
     case birthday = "Дата рождения"
     case city = "Родной город"
+    case editString = "Редактировать"
+    case photos = "Фотографии"
+    case photosIsEmty = "Нет фотографий"
+    case myPosts = "Мои записи"
 
 }

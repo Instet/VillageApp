@@ -15,6 +15,15 @@ struct Constants {
     static var uniIndentBig: CGFloat = 120
     /// constant: 40
     static var heightRegTF: CGFloat = 40
+    /// constant: 60
+    static var avatarSize: CGFloat = 60
+    /// constant: 20
+    static var heightButtonSize: CGFloat = 20
+    /// horizontal line: 0.3
+    static var horizontalLine: CGFloat = 0.3
+    /// vertical line: 1
+    static var verticalLine: CGFloat = 1
+
 
 
 
@@ -44,6 +53,8 @@ struct Constants {
     static var topReg: CGFloat = 14
     /// constant: 10
     static var genderTop: CGFloat = 10
+    /// constant: 2
+    static var smallTopIndent: CGFloat = 2
 
 
     // MARK: - Leading indents
@@ -54,6 +65,8 @@ struct Constants {
     static var bigLeadingIndent: CGFloat = 60
     /// constant: 25
     static var normalLeadingIndent: CGFloat = 25
+    /// constant: 10
+    static var smallLeadingIndent: CGFloat = 10
 
     // MARK: - Trailing indents
 
@@ -71,6 +84,17 @@ struct Constants {
     static var bigTotalIndent: CGFloat = 160
     /// constant: 180
     static var veryBigTotalIndent: CGFloat = 180
+
+    // MARK: - Bottom indents
+
+    /// constant: -14
+    static var bottomIndent: CGFloat = -14
+    /// constant: -5
+    static var bottomIndentOne: CGFloat = -5
+    /// constant: -45
+    static var bottomIndentTwo: CGFloat = -45
+    /// constant: -25
+    static var bottomIndentThree: CGFloat = -20
 
 
 

@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol ViewAuthorisationProtocol: AnyObject {
-
-    var presenter: AuthorisationPresenterProtocol? { get set }
-}
-
-
 protocol CoordinatorProtocol {
 
     var navigationController: UINavigationController? { get set }
@@ -22,11 +16,13 @@ protocol CoordinatorProtocol {
     func confirmView(phone: String)
     func logInView()
     func registationData()
+    func startApp()
 
 }
 
 
 final class AuthorizationCoordinator: CoordinatorProtocol {
+
 
     var navigationController: UINavigationController?
 
@@ -72,6 +68,13 @@ final class AuthorizationCoordinator: CoordinatorProtocol {
         let vc = UserDataViewController()
         vc.presenter = presenter
         navigationController?.viewControllers = [vc]
+    }
+
+    func startApp() {
+        let presenter = AppPresentor()
+        let coordinator = AppCoordinator()
+        let mainTabBar = MainTabBarController(presenter: presenter, coordinator: coordinator)
+        navigationController?.viewControllers = [mainTabBar]
     }
 
 

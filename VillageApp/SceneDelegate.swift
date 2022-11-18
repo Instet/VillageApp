@@ -19,6 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         coordinator = AuthorizationCoordinator(navigationController: navigationController)
         coordinator?.start()
+//
+//        let presenter = AppPresentor()
+//        let coordinator = AppCoordinator()
+//        let main = MainTabBarController(presenter: presenter, coordinator: coordinator)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

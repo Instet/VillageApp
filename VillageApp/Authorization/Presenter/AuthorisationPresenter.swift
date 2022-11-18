@@ -8,12 +8,17 @@
 import Foundation
 import UIKit
 
+protocol ViewAuthorisationProtocol: AnyObject {
+
+    var presenter: AuthorisationPresenterProtocol? { get set }
+}
+
+
 protocol AuthorisationPresenterProtocol {
     
     var view: ViewAuthorisationProtocol? { get set }
     var coordinator: AuthorizationCoordinator? { get set }
     var user: User? { get set }
-    var phone: String { get set }
 
     func registrationUser(phone: String)
     func checkVerificationID(verificationCode: String)
@@ -26,13 +31,16 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
     var view: ViewAuthorisationProtocol?
     var coordinator: AuthorizationCoordinator?
     var user: User?
-    var phone: String = ""
+    static var phoneNumber: String = ""
+    static var userData: [String : Any] = [:]
+
 
     init(coordinator: AuthorizationCoordinator) {
         self.coordinator = coordinator
     }
 
     func registrationUser(phone: String) {
+
         if phone.count < 16 {
             failureAlert(title: "Неправильно набран номер",
                          message: nil,
@@ -41,7 +49,8 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
 
             return
         }
-        FirebaseService.sharad.regUserByPhone(phoneNumber: phone) { verificationID in
+        AuthorisationPresenter.phoneNumber = phone
+        FirebaseService.shared.regUserByPhone(phoneNumber: phone) { verificationID in
             UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
             self.coordinator?.confirmView(phone: phone)
         }
@@ -56,16 +65,28 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
             return
         }
         let failure: (String) -> Void = { [weak self] error in
-            self?.failureAlert(title: error,
+            guard let self = self else { return }
+            self.failureAlert(title: error,
                                message: nil,
                                preferredStyle: .alert,
                                actions: [("Ok", UIAlertAction.Style.cancel, nil)])
         }
 
+        let handler: (([String : Any])?) -> Void = { [weak self] user in
+            guard let self = self else { return }
+            if user == nil {
+                self.coordinator?.registationData()
+            } else {
+                AuthorisationPresenter.userData = user!
+                self.coordinator?.startApp()
+            }
+        }
 
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-        FirebaseService.sharad.verificationCheck(verificationID: verificationID!, verificationCode: verificationCode, failure: failure) {
-            self.coordinator?.registationData()
+        FirebaseService.shared.verificationCheck(verificationID: verificationID!, verificationCode: verificationCode, failure: failure) {
+            FirebaseService.shared.getUserByPhone(phone: AuthorisationPresenter.phoneNumber,
+                                                  handler: handler,
+                                                  failure: failure)
         }
     }
 
@@ -85,11 +106,12 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
                          actions: [("Ок", UIAlertAction.Style.default, nil)])
             return
         }
-        self.user = User(data: userData)
-        FirebaseService.sharad.saveUser(dataUser: userData) { [weak self] id in
+        var userDataForFirebase = userData
+        userDataForFirebase.updateValue(AuthorisationPresenter.phoneNumber, forKey: "phone")
+
+        FirebaseService.shared.saveUser(dataUser: userDataForFirebase) {  [weak self] id in
             guard let self = self else { return }
-            print(id)
-            self.user?.id = id
+            self.coordinator?.startApp()
         }
 
     }

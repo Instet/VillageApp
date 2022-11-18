@@ -113,7 +113,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
         conditionGenderButtons()
     }
 
-
+    // MARK: - Init
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         let nc = NotificationCenter.default

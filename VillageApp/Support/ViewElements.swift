@@ -77,7 +77,7 @@ final class ViewElements {
     /// add system picture
     func getSystemImage(image: String) -> UIImageView {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: image)
+        imageView.image = UIImage(systemName: image)?.withTintColor(UIColor(.mainColor)!, renderingMode: .alwaysOriginal)
         return imageView
     }
 
