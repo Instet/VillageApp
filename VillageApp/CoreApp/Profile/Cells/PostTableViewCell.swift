@@ -77,7 +77,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
         NSLayoutConstraint.activate([
             postAuthor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.normalLeadingIndent),
-            postAuthor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.topIndentSix),
+            postAuthor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.genderTop),
 
             coreView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             coreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

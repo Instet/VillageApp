@@ -16,6 +16,7 @@ enum StringSet: String {
     case numberForString = "Ваш номер будет использоваться для входа в аккаунт"
     case termsOfUse = "Нажимая кнопку “Далее” Вы принимаете пользовательское Соглашение и политику конфедициальности"
     case confirmRegString = "Подтверждение регистрации"
+    case logIn = "Вход"
     case smsString = "Мы отправили SMS с кодом на номер"
     case enterSMS = "Введите код из SMS"
     case greatingString = "С возвращением"
@@ -31,5 +32,6 @@ enum StringSet: String {
     case photos = "Фотографии"
     case photosIsEmty = "Нет фотографий"
     case myPosts = "Мои записи"
+    case allPosts = "Все посты"
 
 }

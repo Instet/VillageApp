@@ -15,8 +15,11 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
     var userData: [String : Any]
 
     private lazy var homeNC: UINavigationController = {
-        
-        let navigation = UINavigationController(rootViewController: HomeViewController())
+        let homeVC = HomeViewController()
+        homeVC.presentor = presentor
+        homeVC.coordinator = coordinator
+        presentor?.coordinator = coordinator
+        let navigation = UINavigationController(rootViewController: homeVC )
         navigation.tabBarItem = UITabBarItem(title: "Главная",
                                              image: UIImage(.houseOrange),
                                              selectedImage: UIImage(.houseOrange))
@@ -45,8 +48,8 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
         return navigation
     }()
 
-    init(presenter: AppPresenterProtocol?, coordinator: AppCoordinatorProtocol) {
-        self.userData = AuthorisationPresenter.userData
+    init(presenter: AppPresenterProtocol?, coordinator: AppCoordinatorProtocol, userData: [String : Any]) {
+        self.userData = userData
         self.presentor = presenter
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)

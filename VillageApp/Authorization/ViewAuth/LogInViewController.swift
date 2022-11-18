@@ -72,7 +72,8 @@ class LogInViewController: UIViewController, ViewAuthorisationProtocol {
 
 
     @objc private func confirmAction() {
-        print(#function)
+        guard let numberPhone = numberTextField.text else { return }
+        presenter?.registrationUser(phone: numberPhone)
     }
 
     @objc private func endEdit() {

@@ -18,7 +18,6 @@ protocol AuthorisationPresenterProtocol {
     
     var view: ViewAuthorisationProtocol? { get set }
     var coordinator: AuthorizationCoordinator? { get set }
-    var user: User? { get set }
 
     func registrationUser(phone: String)
     func checkVerificationID(verificationCode: String)
@@ -30,9 +29,10 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
 
     var view: ViewAuthorisationProtocol?
     var coordinator: AuthorizationCoordinator?
-    var user: User?
+
+    private let backendService = FirebaseService.shared
+
     static var phoneNumber: String = ""
-    static var userData: [String : Any] = [:]
 
 
     init(coordinator: AuthorizationCoordinator) {
@@ -50,7 +50,7 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
             return
         }
         AuthorisationPresenter.phoneNumber = phone
-        FirebaseService.shared.regUserByPhone(phoneNumber: phone) { verificationID in
+        backendService.regUserByPhone(phoneNumber: phone) { verificationID in
             UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
             self.coordinator?.confirmView(phone: phone)
         }
@@ -77,13 +77,12 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
             if user == nil {
                 self.coordinator?.registationData()
             } else {
-                AuthorisationPresenter.userData = user!
-                self.coordinator?.startApp()
+                self.coordinator?.startApp(userData: user!)
             }
         }
 
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-        FirebaseService.shared.verificationCheck(verificationID: verificationID!, verificationCode: verificationCode, failure: failure) {
+        backendService.verificationCheck(verificationID: verificationID!, verificationCode: verificationCode, failure: failure) {
             FirebaseService.shared.getUserByPhone(phone: AuthorisationPresenter.phoneNumber,
                                                   handler: handler,
                                                   failure: failure)
@@ -109,11 +108,30 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
         var userDataForFirebase = userData
         userDataForFirebase.updateValue(AuthorisationPresenter.phoneNumber, forKey: "phone")
 
-        FirebaseService.shared.saveUser(dataUser: userDataForFirebase) {  [weak self] id in
-            guard let self = self else { return }
-            self.coordinator?.startApp()
-        }
 
+        backendService.saveUser(dataUser: userDataForFirebase) {
+            UserDefaults.standard.set(true, forKey: "isRegistred")
+        }
+        getUserData { user in
+            self.coordinator?.startApp(userData: user)
+        }
+    }
+
+
+
+    private func getUserData(completion: @escaping ([String : Any]) -> Void) {
+
+        let failure: (String) -> Void = { [weak self] error in
+            guard let self = self else { return }
+            self.failureAlert(title: error,
+                               message: nil,
+                               preferredStyle: .alert,
+                               actions: [("Ok", UIAlertAction.Style.cancel, nil)])
+        }
+        let handler: (([String : Any])?) -> Void = {  user in
+            completion(user!)
+        }
+        backendService.getUserByPhone(phone: AuthorisationPresenter.phoneNumber, handler: handler, failure: failure)
     }
 
 

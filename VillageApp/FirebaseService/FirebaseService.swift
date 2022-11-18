@@ -21,13 +21,13 @@ final class FirebaseService {
 
     /// Registration by phone number for firebase
     func regUserByPhone(phoneNumber: String,
-                        completion: @escaping (String) -> Void) {
+                        handler: @escaping (String) -> Void) {
         Auth.auth().languageCode = "ru"
         Auth.auth().settings?.isAppVerificationDisabledForTesting = true
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
             guard error == nil else { print(error!.localizedDescription); return }
             guard let verificationID = verificationID else { return }
-            completion(verificationID)
+            handler(verificationID)
         }
     }
 
@@ -47,15 +47,14 @@ final class FirebaseService {
     }
 
     /// save user in firestore
-    func saveUser(dataUser: [String : Any],
-                  completion: @escaping (String) -> Void) {
-        var newUser: DocumentReference? = nil
-        newUser = dataBase.collection("User").addDocument(data: dataUser) { error in
+    func saveUser(dataUser: [String : Any], copmpletion: @escaping () -> Void) {
+       dataBase.collection("User").addDocument(data: dataUser) { error in
             guard error == nil else { print(error!.localizedDescription); return }
-            completion(newUser!.documentID)
+           copmpletion()
         }
     }
 
+    
     /// get user by number phone
     func getUserByPhone(phone: String,
                         handler: @escaping (([String : Any])?) -> Void,
@@ -74,15 +73,16 @@ final class FirebaseService {
         }
     }
 
-    /// save new post
-    func savePost(dataPost: [String : Any]) {
+    /// save new post user
+    func saveUserPost(dataPost: [String : Any]) {
         dataBase.collection("Post").addDocument(data: dataPost, completion: { error in
             guard error == nil else { print(error!.localizedDescription); return }
         })
     }
+    
 
-
-    func getUserPost(userPhone: String,
+    /// get post for user by phone number
+    func getPostsForUser(userPhone: String,
                      handler: @escaping ([[String : Any]]) -> Void,
                      failure: @escaping (String) -> Void) {
         let postRef = dataBase.collection("Post")
@@ -96,8 +96,23 @@ final class FirebaseService {
             })
             handler(posts!)
         }
-
     }
+
+    /// get all posts
+    func getAllPosts(handler: @escaping ([[String : Any]]) -> Void,
+                     failure: @escaping (String) -> Void) {
+        let postRef = dataBase.collection("Post")
+        postRef.getDocuments { querySnapshot, error in
+            guard error == nil else { failure(error!.localizedDescription); return }
+            let posts = querySnapshot?.documents.map({ documets in
+                let post = documets.data()
+                return post
+            })
+            handler(posts!)
+
+        }
+    }
+
 
 
 

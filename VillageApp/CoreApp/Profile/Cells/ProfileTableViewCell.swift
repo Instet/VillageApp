@@ -171,7 +171,7 @@ final class ProfileTableViewCell: UITableViewCell {
 
 
     func configUserData(user: [String : Any]) {
-        fullNameLabel.text = (user["name"] as? String ?? "Test") + " " + (user["lasname"] as? String ?? "User")
+        fullNameLabel.text = (user["name"] as? String ?? "Test") + " " + (user["lastName"] as? String ?? "User")
         cityLabel.text = user["city"] as? String ?? "Moscow"
         birthdayLabel.text = user["birthday"] as? String ?? "12.12.2012"
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB04FF482927997500D036EE /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04FF472927997500D036EE /* HomeHeaderView.swift */; };
 		DB10C60C29184072006457C4 /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10C60B29184072006457C4 /* AuthorizationCoordinator.swift */; };
 		DB10C612291842B4006457C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10C611291842B4006457C4 /* HomeViewController.swift */; };
 		DB10C614291842CC006457C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10C613291842CC006457C4 /* ProfileViewController.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB04FF472927997500D036EE /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		DB10C60B29184072006457C4 /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
 		DB10C611291842B4006457C4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DB10C613291842CC006457C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB04FF462927993100D036EE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB04FF472927997500D036EE /* HomeHeaderView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DB04FF4929279C7000D036EE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		DB10C610291841D1006457C4 /* CoreApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,9 +154,9 @@
 		DB10C61F291959A1006457C4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DBE9C4EE2920FBA600AB525C /* Cells */,
 				DB10C613291842CC006457C4 /* ProfileViewController.swift */,
 				DBE9C5022922804200AB525C /* AddPostViewController.swift */,
+				DBE9C4EE2920FBA600AB525C /* Cells */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -148,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				DB10C611291842B4006457C4 /* HomeViewController.swift */,
+				DB04FF462927993100D036EE /* Cell */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -197,6 +215,7 @@
 			children = (
 				DB89595E291561FF00D370B7 /* AppDelegate.swift */,
 				DB895960291561FF00D370B7 /* SceneDelegate.swift */,
+				DB04FF4929279C7000D036EE /* CoreData */,
 				DB10C610291841D1006457C4 /* CoreApp */,
 				DB89598C2917B08D00D370B7 /* Authorization */,
 				DB10C619291843E8006457C4 /* Model */,
@@ -372,6 +391,7 @@
 				DBE9C4F2292170EC00AB525C /* Post.swift in Sources */,
 				DB4781DD2927590B0017E5E9 /* ViewAppProtocol.swift in Sources */,
 				DB89597F291650A700D370B7 /* UIImageExtension.swift in Sources */,
+				DB04FF482927997500D036EE /* HomeHeaderView.swift in Sources */,
 				DB8959742916469A00D370B7 /* UIViewExtension.swift in Sources */,
 				DB8959832916DDF700D370B7 /* Constants.swift in Sources */,
 				DB895961291561FF00D370B7 /* SceneDelegate.swift in Sources */,

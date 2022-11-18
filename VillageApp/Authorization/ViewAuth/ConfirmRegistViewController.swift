@@ -16,13 +16,31 @@ final class ConfirmRegistViewController: UIViewController, ViewAuthorisationProt
     private var phoneCode: String = ""
     var phone = ""
 
-    private lazy var confirmLabel = viewElements.getLabel(text: .confirmRegString,
+    private var confirmLabelText: StringSet = {
+        if UserDefaults.standard.bool(forKey: "hasAccount") ||
+            UserDefaults.standard.bool(forKey: "isRegistred") {
+            return .logIn
+        } else {
+            return .confirmRegString
+        }
+    }()
+
+    private var registationButtonText: StringSet = {
+        if UserDefaults.standard.bool(forKey: "hasAccount") ||
+            UserDefaults.standard.bool(forKey: "isRegistred") {
+            return .logIn
+        } else {
+            return .registrationString
+        }
+    }()
+
+    private lazy var confirmLabel = viewElements.getLabel(text: confirmLabelText,
                                                           size: 18,
                                                           textColor: UIColor(.orange)!,
                                                           weight: .bold)
     private lazy var labelPhone = viewElements.getLabel(textString: phone,
                                                         size: 14,
-                                                        textColor: .black,
+                                                        textColor: .createColor(lightMode: .darkText, darkMode: .lightText),
                                                         weight: .semibold)
 
     private lazy var secondConfirm = viewElements.getLabel(text: .smsString,
@@ -42,7 +60,7 @@ final class ConfirmRegistViewController: UIViewController, ViewAuthorisationProt
     }()
 
     private lazy var registationButton: UIButton = {
-        let button = viewElements.getButton(name: .registrationString)
+        let button = viewElements.getButton(name: registationButtonText)
         button.addTarget(self, action: #selector(registrationConfirmAction), for: .touchUpInside)
         return button
     }()

@@ -19,9 +19,9 @@ protocol AppPresenterProtocol: AnyObject {
     var coordinator: AppCoordinatorProtocol? { get set }
     var delegate: AppPresentorDelegate? { get set }
 
-
     func addPost(userPost: [String : Any])
-    func fetchPostUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void)
+    func getPostForUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void)
+    func getAllPost(completion: @escaping ([[String : Any]]) -> Void)
 }
 
 // Добавить метод удаление
@@ -32,16 +32,15 @@ final class AppPresentor: AppPresenterProtocol {
 
     var delegate: AppPresentorDelegate?
     var coordinator: AppCoordinatorProtocol?
-    //var post: Post?
+    private var backendService = FirebaseService.shared
 
     func addPost(userPost: [String : Any]) {
-        FirebaseService.shared.savePost(dataPost: userPost)
+        backendService.saveUserPost(dataPost: userPost)
         delegate?.didUpdatePost()
         coordinator?.dismis()
     }
 
-
-    func fetchPostUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void) {
+    func getPostForUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void) {
         let failure: (String) -> Void = { [weak self] error in
             guard let self = self else { return }
             self.failureAlert(title: error,
@@ -55,7 +54,23 @@ final class AppPresentor: AppPresenterProtocol {
 
         }
         let userPhone = userData["phone"] as? String ?? "+7(999)987-65-45"
-        FirebaseService.shared.getUserPost(userPhone: userPhone, handler: handler, failure: failure)
+        backendService.getPostsForUser(userPhone: userPhone, handler: handler, failure: failure)
+    }
+
+
+    func getAllPost(completion: @escaping ([[String : Any]]) -> Void) {
+        let failure: (String) -> Void = { [weak self] error in
+            guard let self = self else { return }
+            self.failureAlert(title: error,
+                              message: nil,
+                              preferredStyle: .alert,
+                              actions: [("Ok", UIAlertAction.Style.cancel, nil)])
+        }
+
+        let handler: ([[String : Any]]) -> Void = { posts in
+            completion(posts)
+        }
+        backendService.getAllPosts(handler: handler, failure: failure)
     }
 
 

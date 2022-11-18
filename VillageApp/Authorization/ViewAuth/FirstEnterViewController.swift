@@ -24,7 +24,8 @@ final class FirstEnterViewController: UIViewController, ViewAuthorisationProtoco
 
     private lazy var logInButton: UIButton = {
         let button = viewElements.getButton(name: .hasAccountString,
-                                     textColor: .black)
+                                            textColor: .createColor(lightMode: .darkText, darkMode: .lightText))
+        button.backgroundColor = .systemBackground
         button.addTarget(self, action: #selector(logInAction), for: .touchUpInside)
         return button
     }()
@@ -60,10 +61,13 @@ final class FirstEnterViewController: UIViewController, ViewAuthorisationProtoco
 
     @objc private func registrationAction() {
         coordinator?.regView()
+        UserDefaults.standard.set(false, forKey: "hasAccount")
+
     }
 
     @objc private func logInAction() {
         coordinator?.logInView()
+        UserDefaults.standard.set(true, forKey: "hasAccount")
 
     }
 

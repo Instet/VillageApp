@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         presentor?.delegate = self
         setupLayout()
 
-        presentor?.fetchPostUser(userData: userData, completion: {  posts in
+        presentor?.getPostForUser(userData: userData, completion: {  posts in
             self.array = posts
             
             DispatchQueue.main.async {
@@ -166,7 +166,7 @@ extension ProfileViewController: AppPresentorDelegate {
 
     func didUpdatePost() {
         activityIndicator.startAnimating()
-        presentor?.fetchPostUser(userData: userData, completion: {  posts in
+        presentor?.getPostForUser(userData: userData, completion: {  posts in
             self.array = posts
             DispatchQueue.main.async {
                 self.profileTableView.reloadData()

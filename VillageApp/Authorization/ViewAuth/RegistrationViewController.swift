@@ -13,7 +13,7 @@ final class RegistrationViewController: UIViewController, ViewAuthorisationProto
 
     private let viewElements: ViewElements = ViewElements.shared
 
-    private lazy var registrationLabel = viewElements.getLabel(text: .registrationString,
+    private lazy var registrationLabel = viewElements.getLabel(text: .confirmRegString,
                                                                size: 18,
                                                                textColor: UIColor(.mainColor)!,
                                                                weight: .bold)

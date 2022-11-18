@@ -20,7 +20,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
         button.setTitle("Сохранить", for: .normal)
         button.setTitleColor(UIColor(.mainColor), for: .normal)
         button.setTitleColor(.systemGray2, for: .disabled)
-        button.addTarget(self, action: #selector(savePost), for: .touchUpInside)
+        button.addTarget(self, action: #selector(saveUserPost), for: .touchUpInside)
         return button
     }()
 
@@ -82,7 +82,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
 
 
 
-    @objc private func savePost() {
+    @objc private func saveUserPost() {
         let author = (userData["name"] as? String ?? "Test") + " " + (userData["lastName"] as? String ?? "Test")
         let userPhone = userData["phone"] as? String ?? "+7(999)987-65-45"
         guard let post = postTextView.text else { return }

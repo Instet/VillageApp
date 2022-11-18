@@ -16,7 +16,7 @@ protocol CoordinatorProtocol {
     func confirmView(phone: String)
     func logInView()
     func registationData()
-    func startApp()
+    func startApp(userData: [String : Any])
 
 }
 
@@ -33,9 +33,16 @@ final class AuthorizationCoordinator: CoordinatorProtocol {
 
 
     func start() {
-        let vc = FirstEnterViewController()
-        vc.coordinator = self
-        navigationController?.viewControllers = [vc]
+        if UserDefaults.standard.bool(forKey: "isRegistred") == true {
+            let presenter = AuthorisationPresenter(coordinator: self)
+            let vc = LogInViewController()
+            vc.presenter = presenter
+            navigationController?.viewControllers = [vc]
+        } else {
+            let vc = FirstEnterViewController()
+            vc.coordinator = self
+            navigationController?.viewControllers = [vc]
+        }
     }
 
     func regView() {
@@ -70,10 +77,10 @@ final class AuthorizationCoordinator: CoordinatorProtocol {
         navigationController?.viewControllers = [vc]
     }
 
-    func startApp() {
+    func startApp(userData: [String : Any]) {
         let presenter = AppPresentor()
         let coordinator = AppCoordinator()
-        let mainTabBar = MainTabBarController(presenter: presenter, coordinator: coordinator)
+        let mainTabBar = MainTabBarController(presenter: presenter, coordinator: coordinator, userData: userData)
         navigationController?.viewControllers = [mainTabBar]
     }
 
