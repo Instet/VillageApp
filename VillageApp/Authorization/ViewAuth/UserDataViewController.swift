@@ -93,6 +93,8 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
 
 
 
+    // MARK: - Functions
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let nc = NotificationCenter.default
@@ -113,7 +115,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
         conditionGenderButtons()
     }
 
-    // MARK: - Init
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         let nc = NotificationCenter.default
@@ -259,6 +261,8 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
     }
     
 }
+
+// MARK: - top buttons
 
 extension UserDataViewController {
 

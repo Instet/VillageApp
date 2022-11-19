@@ -34,6 +34,8 @@ class HomeViewController: UIViewController, ViewAppProtocol {
         return tableView
     }()
 
+    // MARK: - Functions
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presentor?.getAllPost(completion: { posts in
@@ -55,11 +57,12 @@ class HomeViewController: UIViewController, ViewAppProtocol {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationItem.largeTitleDisplayMode = .always
         }
-        view.backgroundColor = .systemBackground
     }
 
     private func setupLayout() {
         self.title = "Главная"
+        view.backgroundColor = .systemBackground
+
         view.addSubviews(homeTableView, activityIndicator)
 
         NSLayoutConstraint.activate([
@@ -93,7 +96,9 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let postCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-        postCell.configCell(userPost: arrayAllPosts![indexPath.row])
+        postCell.arrayPosts = arrayAllPosts ?? []
+        postCell.cellIndex = indexPath.row
+        postCell.configCell(userPost: arrayAllPosts![postCell.cellIndex])
         return postCell
     }
 

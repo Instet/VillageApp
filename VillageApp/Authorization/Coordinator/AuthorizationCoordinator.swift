@@ -26,11 +26,14 @@ final class AuthorizationCoordinator: CoordinatorProtocol {
 
     var navigationController: UINavigationController?
 
+    // MARK: - Init
+
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
 
 
+    // MARK: - Functions
 
     func start() {
         if UserDefaults.standard.bool(forKey: "isRegistred") == true {

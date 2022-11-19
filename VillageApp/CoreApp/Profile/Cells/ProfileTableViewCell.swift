@@ -86,6 +86,7 @@ final class ProfileTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
         self.backgroundColor = .systemBackground
+        self.selectionStyle = .none
     }
 
     required init?(coder: NSCoder) {
@@ -111,7 +112,6 @@ final class ProfileTableViewCell: UITableViewCell {
 
             detailInfoButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: Constants.topIndentSix),
             detailInfoButton.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: Constants.smallLeadingIndent),
-//            detailInfoButton.heightAnchor.constraint(equalToConstant: Constants.heightButtonSize),
             detailInfoButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomIndent)
         ])
     }
@@ -131,8 +131,6 @@ final class ProfileTableViewCell: UITableViewCell {
             NSLayoutConstraint.activate([
                 detailInfoButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: Constants.topIndentSix),
                 detailInfoButton.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: Constants.smallLeadingIndent),
-                detailInfoButton.heightAnchor.constraint(equalToConstant: Constants.heightButtonSize),
-//                detailInfoButton.bottomAnchor.constraint(equalTo: cityLabelTitle.topAnchor, constant: Constants.trailingIndent),
 
                 cityLabelTitle.topAnchor.constraint(equalTo: detailInfoButton.bottomAnchor, constant: Constants.topIndentThree),
                 cityLabelTitle.leadingAnchor.constraint(equalTo: avatar.leadingAnchor),

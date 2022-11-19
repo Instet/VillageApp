@@ -34,11 +34,12 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
 
     static var phoneNumber: String = ""
 
-
+    // MARK: - Init
     init(coordinator: AuthorizationCoordinator) {
         self.coordinator = coordinator
     }
 
+    // MARK: - Functions
     func registrationUser(phone: String) {
 
         if phone.count < 16 {

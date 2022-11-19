@@ -42,6 +42,8 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
         return textView
     }()
 
+    // MARK: - Functions
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         postTextView.becomeFirstResponder()

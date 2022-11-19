@@ -150,7 +150,8 @@ extension ProfileViewController: UITableViewDataSource {
         } else if indexPath.section == 2 {
 
             guard let postCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-
+            postCell.arrayPosts = array ?? []
+            postCell.cellIndex = indexPath.row
             postCell.configCell(userPost: array![indexPath.row])
             return postCell
         }

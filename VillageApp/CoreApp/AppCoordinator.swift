@@ -24,6 +24,8 @@ final class AppCoordinator: AppCoordinatorProtocol {
     
     var navigationController: UINavigationController?
 
+    // MARK: - Functions
+
     func addPostPresent(presentor: AppPresenterProtocol?,
                         coordinator: AppCoordinatorProtocol?,
                         userData: [String : Any]) {

@@ -34,6 +34,8 @@ final class AppPresentor: AppPresenterProtocol {
     var coordinator: AppCoordinatorProtocol?
     private var backendService = FirebaseService.shared
 
+    // MARK: - Functions
+
     func addPost(userPost: [String : Any]) {
         backendService.saveUserPost(dataPost: userPost)
         delegate?.didUpdatePost()

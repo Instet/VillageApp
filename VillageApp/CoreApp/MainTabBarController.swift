@@ -42,11 +42,13 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
 
     private lazy var favoritesNC: UINavigationController = {
         let navigation = UINavigationController(rootViewController: FavoritesViewController())
-        navigation.tabBarItem = UITabBarItem(title: "Cохраненные",
+        navigation.tabBarItem = UITabBarItem(title: "Избранное",
                                              image: UIImage(.like),
                                              selectedImage: UIImage(.like))
         return navigation
     }()
+
+    // MARK: - Init
 
     init(presenter: AppPresenterProtocol?, coordinator: AppCoordinatorProtocol, userData: [String : Any]) {
         self.userData = userData
@@ -61,6 +63,8 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
     }
 
 
+
+    // MARK: - Functions
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

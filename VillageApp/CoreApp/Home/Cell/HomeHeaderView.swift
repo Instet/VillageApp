@@ -16,6 +16,7 @@ class HomeHeaderView: UITableViewHeaderFooterView {
                                                             textColor: UIColor(.mainColor)!,
                                                             weight: .regular,
                                                             textAlignment: .left)
+    // MARK: - Init
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -25,6 +26,8 @@ class HomeHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Functions
 
     private func setupLayout() {
         addSubviews(labelTitlePost)

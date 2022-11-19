@@ -68,6 +68,8 @@ final class ConfirmRegistViewController: UIViewController, ViewAuthorisationProt
     private lazy var image = viewElements.getAssetsImage(.labelApp)
 
 
+    // MARK: - Functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()

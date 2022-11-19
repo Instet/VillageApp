@@ -49,6 +49,8 @@ final class RegistrationViewController: UIViewController, ViewAuthorisationProto
     }()
 
 
+    // MARK: - Functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()

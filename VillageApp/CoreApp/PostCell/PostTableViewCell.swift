@@ -12,6 +12,12 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     weak var presentor: AppPresenterProtocol?
     weak var coordinator: AppCoordinatorProtocol?
 
+    private let coreData: CoreDataManager = CoreDataManager.shared
+
+
+    var arrayPosts = [[String : Any]]()
+    var cellIndex: Int = 0
+
 
     private let viewElements: ViewElements = ViewElements.shared
 
@@ -25,15 +31,24 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
         return text
     }()
 
+    private lazy var avatar: UIImageView = {
+        let image = viewElements.getSystemImage(image: "person.circle")
+        image.layer.cornerRadius = 15
+        image.contentMode = .scaleAspectFit
+        image.clipsToBounds = true
+        return image
+    }()
+
     private lazy var postAuthor: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
         return label
     }()
 
-    private lazy var addInNoteButton: UIButton = {
+    lazy var addInNoteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(.bookmark), for: .normal)
+        button.setImage(UIImage(systemName: "bookmark")?.withTintColor(UIColor(.mainColor)!, renderingMode: .alwaysOriginal), for: .normal)
+        button.setImage(UIImage(systemName: "bookmark.fill")?.withTintColor(UIColor(.orange)!, renderingMode: .alwaysOriginal), for: .selected)
         button.addTarget(self, action: #selector(addInNote), for: .touchUpInside)
         return button
     }()
@@ -73,11 +88,16 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     // MARK: - Functions
 
     private func setupLayout() {
-        contentView.addSubviews(postAuthor, coreView)
+        contentView.addSubviews(avatar, postAuthor, coreView)
 
         NSLayoutConstraint.activate([
-            postAuthor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.normalLeadingIndent),
-            postAuthor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.genderTop),
+            avatar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.normalLeadingIndent),
+            avatar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.genderTop),
+            avatar.heightAnchor.constraint(equalToConstant: Constants.topIndentFour),
+            avatar.widthAnchor.constraint(equalTo: avatar.heightAnchor),
+
+            postAuthor.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: Constants.smallLeadingIndent),
+            postAuthor.centerYAnchor.constraint(equalTo: avatar.centerYAnchor),
 
             coreView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             coreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -113,7 +133,9 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
     @objc private func addInNote() {
-        print(#function)
+        // реализовать сохранение состояния кнопки
+        coreData.savePost(index: cellIndex, postData: arrayPosts)
+
     }
 
 
@@ -121,8 +143,6 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     func configCell(userPost: [String : Any]) {
         postAuthor.text = userPost["author"] as? String ?? "Test"
         postText.text = userPost["post"] as? String ?? "My Post"
-
-
     }
 
     

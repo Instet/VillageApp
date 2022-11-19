@@ -39,6 +39,8 @@ class LogInViewController: UIViewController, ViewAuthorisationProtocol {
 
     
 
+    // MARK: - Functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()

@@ -62,6 +62,7 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+        self.selectionStyle = .none
         if imageViewArray[0].image == nil {
             stackView.isHidden = true
         } else {

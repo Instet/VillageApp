@@ -30,6 +30,9 @@ final class FirstEnterViewController: UIViewController, ViewAuthorisationProtoco
         return button
     }()
 
+
+    // MARK: - Functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
