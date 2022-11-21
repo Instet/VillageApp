@@ -9,8 +9,8 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
 
-    var presentor: AppPresenterProtocol?
-    var coordinator: AppCoordinatorProtocol?
+    weak var presentor: AppPresenterProtocol?
+    weak var coordinator: AppCoordinatorProtocol?
     
     private let viewElements: ViewElements = ViewElements.shared
 
@@ -39,17 +39,18 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
     private lazy var stackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: imageViewArray)
         stack.alignment = .center
+        stack.distribution = .fillEqually
         stack.axis = .horizontal
         stack.spacing = 8
         return stack
     }()
 
-    private lazy var imageViewArray: [UIImageView] = {
+     private lazy var imageViewArray: [UIImageView] = {
         var array = [UIImageView]()
         for _ in 1...4 {
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleToFill
             array.append(imageView)
         }
 
@@ -63,13 +64,6 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
         self.selectionStyle = .none
-        if imageViewArray[0].image == nil {
-            stackView.isHidden = true
-        } else {
-            countStatePhotosLabel.isHidden = true
-            stackView.isHidden = false
-        }
-
     }
 
     required init?(coder: NSCoder) {
@@ -91,9 +85,9 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
 
             stackView.leadingAnchor.constraint(equalTo: photosLabel.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: nextButton.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: Constants.topIndentOne),
+            stackView.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: Constants.topIndentOne),
             stackView.heightAnchor.constraint(equalToConstant: Constants.topIndentSeven),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomIndentOne),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.bottomIndent),
 
             countStatePhotosLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             countStatePhotosLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
@@ -101,7 +95,30 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
     @objc private func pushTap() {
-        print(#function)
+        coordinator?.pushPhotoView(presentor: presentor,
+                                   coordinator: coordinator)
+        
+    }
+
+    func configViewCell(images: [UIImage]?) {
+        if images?.count == 0 {
+            stackView.isHidden = true
+        } else {
+            for i in 0 ..< images!.count {
+                if i == 4 {
+                    countStatePhotosLabel.isHidden = true
+                    stackView.isHidden = false
+                    return
+                }
+                imageViewArray[i].image = images![i]
+            }
+            countStatePhotosLabel.isHidden = true
+            stackView.isHidden = false
+        }
+
+
+
+
     }
 
   

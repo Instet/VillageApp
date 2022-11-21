@@ -15,6 +15,10 @@ protocol AppCoordinatorProtocol: AnyObject {
     func addPostPresent(presentor: AppPresenterProtocol?,
                         coordinator: AppCoordinatorProtocol?,
                         userData: [String : Any])
+    func pushPhotoView(presentor: AppPresenterProtocol?,
+                       coordinator: AppCoordinatorProtocol?)
+
+    func showPhoto(images: [UIImage]?, index: Int)
     func dismis()
 
 
@@ -36,6 +40,26 @@ final class AppCoordinator: AppCoordinatorProtocol {
         vc.modalPresentationStyle = .automatic
         navigationController?.present(vc, animated: true)
     }
+
+    func pushPhotoView(presentor: AppPresenterProtocol?,
+                       coordinator: AppCoordinatorProtocol?) {
+        let vc = PhotosViewController()
+        vc.addBackButton()
+        vc.coordinator = coordinator
+        vc.presentor = presentor
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func showPhoto(images: [UIImage]?, index: Int) {
+        guard let images = images else { return }
+        let vc = PhotoPreview()
+        vc.index = index
+        vc.images = images
+        vc.addBackButton()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+
 
     func dismis() {
         navigationController?.dismiss(animated: true)

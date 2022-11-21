@@ -13,6 +13,7 @@ class FavoritesViewController: UIViewController, ViewAppProtocol {
     var presentor: AppPresenterProtocol?
     var coordinator: AppCoordinatorProtocol?
     private let coreData: CoreDataManager = CoreDataManager.shared
+    private let viewElements: ViewElements = ViewElements.shared
 
 
     private lazy var favoritesTableView: UITableView = {
@@ -41,7 +42,6 @@ class FavoritesViewController: UIViewController, ViewAppProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFavoritPosts()
-
     }
 
     override func viewDidLoad() {
@@ -66,8 +66,9 @@ class FavoritesViewController: UIViewController, ViewAppProtocol {
             favoritesTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             favoritesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             favoritesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            favoritesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            favoritesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+
     }
 
     private func fetchFavoritPosts() {

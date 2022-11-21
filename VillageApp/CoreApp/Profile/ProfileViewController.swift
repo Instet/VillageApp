@@ -56,6 +56,9 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        presentor?.getImage()
+        profileTableView.reloadData()
+
     }
 
     override func viewDidLoad() {
@@ -144,9 +147,11 @@ extension ProfileViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
 
             guard let photoCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self)) as? PhotosTableViewCell else { return UITableViewCell() }
+            photoCell.coordinator = coordinator
+            photoCell.presentor = presentor
+            photoCell.configViewCell(images: presentor?.images)
 
             return photoCell
-
         } else if indexPath.section == 2 {
 
             guard let postCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return UITableViewCell() }

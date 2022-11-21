@@ -35,7 +35,6 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
         let image = viewElements.getSystemImage(image: "person.circle")
         image.layer.cornerRadius = 15
         image.contentMode = .scaleAspectFit
-        image.clipsToBounds = true
         return image
     }()
 
@@ -88,6 +87,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     // MARK: - Functions
 
     private func setupLayout() {
+
         contentView.addSubviews(avatar, postAuthor, coreView)
 
         NSLayoutConstraint.activate([
@@ -103,7 +103,8 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
             coreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             coreView.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: Constants.topIndentTwo),
             coreView.heightAnchor.constraint(equalToConstant: contentView.frame.width),
-            coreView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            coreView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+
 
         ])
 
@@ -139,8 +140,9 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
 
-    /// get post
+    /// get post for Favorites
     func configCell(userPost: [String : Any]) {
+        guard !userPost.isEmpty else { return }
         postAuthor.text = userPost["author"] as? String ?? "Test"
         postText.text = userPost["post"] as? String ?? "My Post"
     }

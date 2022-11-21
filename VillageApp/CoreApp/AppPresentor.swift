@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import Photos
+import PhotosUI
 
 protocol AppPresentorDelegate: AnyObject {
 
@@ -18,20 +20,30 @@ protocol AppPresenterProtocol: AnyObject {
 
     var coordinator: AppCoordinatorProtocol? { get set }
     var delegate: AppPresentorDelegate? { get set }
+    var images: [UIImage] { get set }
 
     func addPost(userPost: [String : Any])
     func getPostForUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void)
     func getAllPost(completion: @escaping ([[String : Any]]) -> Void)
+    func getImage()
+
+    /// checking access to the photo library
+    func requestAuthorisation(completion: @escaping () -> Void)
 }
 
 // Добавить метод удаление
-// Сортировка постов по дате
+// cортировка постов по дате
 // добавить возможность сохранения фото
+// локализация приложения
 
 final class AppPresentor: AppPresenterProtocol {
 
     var delegate: AppPresentorDelegate?
     var coordinator: AppCoordinatorProtocol?
+    private let fileManager = FileManagerService()
+    var images: [UIImage] = []
+
+
     private var backendService = FirebaseService.shared
 
     // MARK: - Functions
@@ -41,6 +53,8 @@ final class AppPresentor: AppPresenterProtocol {
         delegate?.didUpdatePost()
         coordinator?.dismis()
     }
+
+
 
     func getPostForUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void) {
         let failure: (String) -> Void = { [weak self] error in
@@ -60,6 +74,8 @@ final class AppPresentor: AppPresenterProtocol {
     }
 
 
+
+
     func getAllPost(completion: @escaping ([[String : Any]]) -> Void) {
         let failure: (String) -> Void = { [weak self] error in
             guard let self = self else { return }
@@ -76,7 +92,59 @@ final class AppPresentor: AppPresenterProtocol {
     }
 
 
+
+    func requestAuthorisation(completion: @escaping () -> Void) {
+        let photoStatus: PHAuthorizationStatus
+        photoStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        if photoStatus == .notDetermined {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                if status == .authorized || status == .limited{
+                    completion()
+                } else {
+                    DispatchQueue.main.async {
+                        self.alertForRequstAuthPH()
+                    }
+                }
+            }
+        } else if photoStatus == .authorized || photoStatus == .limited {
+            completion()
+        } else {
+            DispatchQueue.main.async {
+                self.alertForRequstAuthPH()
+            }
+        }
+
+    }
+
+
+    func getImage() {
+        images.removeAll()
+
+        guard let urlImages = fileManager.getFiles() else { return }
+        for url in urlImages {
+            var image: UIImage?
+            if #available(iOS 16.0, *) {
+                image = UIImage(contentsOfFile: url.path(percentEncoded: true))
+            } else {
+                image = UIImage(contentsOfFile: url.path)
+            }
+            images.append(image ?? UIImage())
+        }
+
+    }
+
+
+    private func alertForRequstAuthPH() {
+        failureAlert(title: "В доступе отказано",
+                     message: "Приложению нужен доступ к библиотеке фотографии",
+                     preferredStyle: .alert,
+                     actions: [("Ok", UIAlertAction.Style.default, nil)])
+    }
+
+
 }
+
+
 
 
 
@@ -88,7 +156,7 @@ extension AppPresentor {
                       actions: [(title: String,
                                  style: UIAlertAction.Style,
                                  handler: ((UIAlertAction) -> Void)?)]) {
-
+        
         let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         actions.forEach { alertAction in
             let action = UIAlertAction(title: alertAction.title,

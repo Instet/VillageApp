@@ -33,5 +33,7 @@ enum StringSet: String {
     case photosIsEmty = "Нет фотографий"
     case myPosts = "Мои записи"
     case allPosts = "Все посты"
+    case myPhotos = "Мои фотографии"
+    case emptyFavoritPost = "Здесь пусто"
 
 }

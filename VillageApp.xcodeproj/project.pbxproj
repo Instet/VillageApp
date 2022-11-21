@@ -51,6 +51,10 @@
 		DBE9C5032922804200AB525C /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9C5022922804200AB525C /* AddPostViewController.swift */; };
 		DBEB89692928F9EC00D9EAF5 /* PostModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB89672928F9EC00D9EAF5 /* PostModel+CoreDataClass.swift */; };
 		DBEB896A2928F9EC00D9EAF5 /* PostModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB89682928F9EC00D9EAF5 /* PostModel+CoreDataProperties.swift */; };
+		DBEB896D29297AA000D9EAF5 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB896C29297AA000D9EAF5 /* PhotosViewController.swift */; };
+		DBEB896F292A5FE400D9EAF5 /* PhotoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB896E292A5FE400D9EAF5 /* PhotoItemCell.swift */; };
+		DBEB8971292AA0DC00D9EAF5 /* PhotoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB8970292AA0DC00D9EAF5 /* PhotoPreview.swift */; };
+		DBEB8976292AAA5E00D9EAF5 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB8975292AAA5E00D9EAF5 /* FileManagerService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +102,10 @@
 		DBE9C5022922804200AB525C /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		DBEB89672928F9EC00D9EAF5 /* PostModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DBEB89682928F9EC00D9EAF5 /* PostModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DBEB896C29297AA000D9EAF5 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		DBEB896E292A5FE400D9EAF5 /* PhotoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemCell.swift; sourceTree = "<group>"; };
+		DBEB8970292AA0DC00D9EAF5 /* PhotoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreview.swift; sourceTree = "<group>"; };
+		DBEB8975292AAA5E00D9EAF5 /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +132,8 @@
 		DB04FF4929279C7000D036EE /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				DBEB89682928F9EC00D9EAF5 /* PostModel+CoreDataProperties.swift */,
+				DBEB89672928F9EC00D9EAF5 /* PostModel+CoreDataClass.swift */,
 				DBC0A4A32928E41200A10DC8 /* CoreDataManager.swift */,
 				DBC0A4A52928E46100A10DC8 /* AppModel.xcdatamodeld */,
 			);
@@ -137,10 +147,10 @@
 				DBE9C4FE29227CAA00AB525C /* AppPresentor.swift */,
 				DBE9C50029227CC500AB525C /* AppCoordinator.swift */,
 				DB10C6172918436A006457C4 /* MainTabBarController.swift */,
-				DBEB896B2929132C00D9EAF5 /* PostCell */,
 				DB10C620291959B7006457C4 /* Home */,
 				DB10C621291959D6006457C4 /* Favorites */,
 				DB10C61F291959A1006457C4 /* Profile */,
+				DBE9C4EE2920FBA600AB525C /* Cells */,
 			);
 			path = CoreApp;
 			sourceTree = "<group>";
@@ -167,7 +177,8 @@
 			children = (
 				DB10C613291842CC006457C4 /* ProfileViewController.swift */,
 				DBE9C5022922804200AB525C /* AddPostViewController.swift */,
-				DBE9C4EE2920FBA600AB525C /* Cells */,
+				DBEB896C29297AA000D9EAF5 /* PhotosViewController.swift */,
+				DBEB8970292AA0DC00D9EAF5 /* PhotoPreview.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -208,8 +219,6 @@
 		DB895952291561FF00D370B7 = {
 			isa = PBXGroup;
 			children = (
-				DBEB89672928F9EC00D9EAF5 /* PostModel+CoreDataClass.swift */,
-				DBEB89682928F9EC00D9EAF5 /* PostModel+CoreDataProperties.swift */,
 				DB89595D291561FF00D370B7 /* VillageApp */,
 				DB89595C291561FF00D370B7 /* Products */,
 			);
@@ -228,11 +237,12 @@
 			children = (
 				DB89595E291561FF00D370B7 /* AppDelegate.swift */,
 				DB895960291561FF00D370B7 /* SceneDelegate.swift */,
-				DB04FF4929279C7000D036EE /* CoreData */,
 				DB10C610291841D1006457C4 /* CoreApp */,
 				DB89598C2917B08D00D370B7 /* Authorization */,
 				DB10C619291843E8006457C4 /* Model */,
 				DB10C61C291940EE006457C4 /* FirebaseService */,
+				DB04FF4929279C7000D036EE /* CoreData */,
+				DBEB8974292AA9F500D9EAF5 /* FileManager */,
 				DB8959722915949500D370B7 /* Support */,
 				DB8959672915620100D370B7 /* Assets.xcassets */,
 				DB8959692915620100D370B7 /* LaunchScreen.storyboard */,
@@ -280,9 +290,11 @@
 		DBE9C4EE2920FBA600AB525C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DBEB896B2929132C00D9EAF5 /* PostCell */,
 				DB10C627291991BF006457C4 /* ProfileTableViewCell.swift */,
 				DBE9C4EF2920FC2A00AB525C /* PhotosTableViewCell.swift */,
 				DBE9C4F52921755E00AB525C /* PostHeaderView.swift */,
+				DBEB896E292A5FE400D9EAF5 /* PhotoItemCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -305,6 +317,14 @@
 				DBE9C4F32921752100AB525C /* PostTableViewCell.swift */,
 			);
 			path = PostCell;
+			sourceTree = "<group>";
+		};
+		DBEB8974292AA9F500D9EAF5 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				DBEB8975292AAA5E00D9EAF5 /* FileManagerService.swift */,
+			);
+			path = FileManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,12 +408,14 @@
 				DB89597D29164C4900D370B7 /* ImageSet.swift in Sources */,
 				DB895963291561FF00D370B7 /* FirstEnterViewController.swift in Sources */,
 				DBE9C4FF29227CAA00AB525C /* AppPresentor.swift in Sources */,
+				DBEB8976292AAA5E00D9EAF5 /* FileManagerService.swift in Sources */,
 				DB10C62A291AAA9E006457C4 /* UserDataViewController.swift in Sources */,
 				DB10C61E2919411F006457C4 /* FirebaseService.swift in Sources */,
 				DB10C6182918436A006457C4 /* MainTabBarController.swift in Sources */,
 				DBC0A4A42928E41200A10DC8 /* CoreDataManager.swift in Sources */,
 				DBE9C4F42921752100AB525C /* PostTableViewCell.swift in Sources */,
 				DB89598129166B3E00D370B7 /* StringExtension.swift in Sources */,
+				DBEB896D29297AA000D9EAF5 /* PhotosViewController.swift in Sources */,
 				DB89597B29164BF300D370B7 /* ColorSet.swift in Sources */,
 				DB10C62D291AAE61006457C4 /* AuthorisationPresenter.swift in Sources */,
 				DB10C60C29184072006457C4 /* AuthorizationCoordinator.swift in Sources */,
@@ -409,6 +431,7 @@
 				DB89598E2917C15E00D370B7 /* LogInViewController.swift in Sources */,
 				DBE9C50129227CC500AB525C /* AppCoordinator.swift in Sources */,
 				DB8959892916EC8900D370B7 /* StringSet.swift in Sources */,
+				DBEB8971292AA0DC00D9EAF5 /* PhotoPreview.swift in Sources */,
 				DBE9C4F02920FC2A00AB525C /* PhotosTableViewCell.swift in Sources */,
 				DBEB896A2928F9EC00D9EAF5 /* PostModel+CoreDataProperties.swift in Sources */,
 				DBC0A4A72928E46100A10DC8 /* AppModel.xcdatamodeld in Sources */,
@@ -423,6 +446,7 @@
 				DB89597929164BDD00D370B7 /* ViewElements.swift in Sources */,
 				DB10C61629184328006457C4 /* FavoritesViewController.swift in Sources */,
 				DBE9C5032922804200AB525C /* AddPostViewController.swift in Sources */,
+				DBEB896F292A5FE400D9EAF5 /* PhotoItemCell.swift in Sources */,
 				DB10C61B291843FE006457C4 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,7 +594,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,7 +626,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
