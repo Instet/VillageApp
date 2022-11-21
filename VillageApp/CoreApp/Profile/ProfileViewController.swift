@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
     weak var coordinator: AppCoordinatorProtocol?
     var user: User
     var postData = [String : Any]()
-    var array: [[String : Any]]?
+    var array: [Post]?
 
 
     private lazy var activityIndicator: UIActivityIndicatorView = {

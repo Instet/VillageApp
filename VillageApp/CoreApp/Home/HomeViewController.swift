@@ -11,7 +11,7 @@ class HomeViewController: UIViewController, ViewAppProtocol {
 
     weak var presentor: AppPresenterProtocol?
     weak var coordinator: AppCoordinatorProtocol?
-    var arrayAllPosts: [[String : Any]]?
+    var arrayAllPosts: [Post]?
     
 
 

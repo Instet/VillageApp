@@ -23,8 +23,8 @@ protocol AppPresenterProtocol: AnyObject {
     var images: [UIImage] { get set }
 
     func addPost(userPost: [String : Any])
-    func getPostForUser(user: User, completion: @escaping ([[String : Any]]) -> Void)
-    func getAllPost(completion: @escaping ([[String : Any]]) -> Void)
+    func getPostForUser(user: User, completion: @escaping ([Post]) -> Void)
+    func getAllPost(completion: @escaping ([Post]) -> Void)
     func getImage()
 
     /// checking access to the photo library
@@ -56,7 +56,7 @@ final class AppPresentor: AppPresenterProtocol {
 
 
 
-    func getPostForUser(user: User, completion: @escaping ([[String : Any]]) -> Void) {
+    func getPostForUser(user: User, completion: @escaping ([Post]) -> Void) {
         let failure: (String) -> Void = { [weak self] error in
             guard let self = self else { return }
             self.failureAlert(title: error,
@@ -65,18 +65,17 @@ final class AppPresentor: AppPresenterProtocol {
                               actions: [("Ok", UIAlertAction.Style.cancel, nil)])
         }
 
-        let handler: ([[String : Any]]) -> Void = { posts in
+        let handler: ([Post]) -> Void = { posts in
             completion(posts)
 
         }
-        //let userPhone = userData["phone"] as? String ?? "+7(999)987-65-45"
         backendService.getPostsForUser(userPhone: user.phone, handler: handler, failure: failure)
     }
 
 
 
 
-    func getAllPost(completion: @escaping ([[String : Any]]) -> Void) {
+    func getAllPost(completion: @escaping ([Post]) -> Void) {
         let failure: (String) -> Void = { [weak self] error in
             guard let self = self else { return }
             self.failureAlert(title: error,
@@ -85,7 +84,7 @@ final class AppPresentor: AppPresenterProtocol {
                               actions: [("Ok", UIAlertAction.Style.cancel, nil)])
         }
 
-        let handler: ([[String : Any]]) -> Void = { posts in
+        let handler: ([Post]) -> Void = { posts in
             completion(posts)
         }
         backendService.getAllPosts(handler: handler, failure: failure)

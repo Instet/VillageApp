@@ -15,7 +15,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     private let coreData: CoreDataManager = CoreDataManager.shared
 
 
-    var arrayPosts = [[String : Any]]()
+    var arrayPosts = [Post]()
     var cellIndex: Int = 0
 
 
@@ -140,11 +140,10 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
 
-    /// get post for Favorites
-    func configCell(userPost: [String : Any]) {
-        guard !userPost.isEmpty else { return }
-        postAuthor.text = userPost["author"] as? String ?? "Test"
-        postText.text = userPost["post"] as? String ?? "My Post"
+    /// get post 
+    func configCell(userPost: Post) {
+        postAuthor.text = userPost.author
+        postText.text = userPost.post
     }
 
     

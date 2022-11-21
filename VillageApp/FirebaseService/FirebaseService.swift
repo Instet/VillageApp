@@ -15,8 +15,6 @@ final class FirebaseService {
 
     let dataBase = Firestore.firestore()
 
-    var post = [[String : Any]]()
-
     private init() {}
 
     /// Registration by phone number for firebase
@@ -48,9 +46,9 @@ final class FirebaseService {
 
     /// save user in firestore
     func saveUser(dataUser: [String : Any], copmpletion: @escaping () -> Void) {
-       dataBase.collection("User").addDocument(data: dataUser) { error in
+        dataBase.collection("User").addDocument(data: dataUser) { error in
             guard error == nil else { print(error!.localizedDescription); return }
-           copmpletion()
+            copmpletion()
         }
     }
 
@@ -84,8 +82,8 @@ final class FirebaseService {
 
     /// get post for user by phone number
     func getPostsForUser(userPhone: String,
-                     handler: @escaping ([[String : Any]]) -> Void,
-                     failure: @escaping (String) -> Void) {
+                         handler: @escaping ([Post]) -> Void,
+                         failure: @escaping (String) -> Void) {
         let postRef = dataBase.collection("Post")
         let query = postRef.whereField("userPhone", isEqualTo: userPhone)
 
@@ -95,12 +93,16 @@ final class FirebaseService {
                 let post = document.data()
                 return post
             })
-            handler(posts!)
+            let arrayPost = posts?.map({ dictPost in
+                let post = Post(postData: dictPost)
+                return post
+            })
+            handler(arrayPost!)
         }
     }
 
     /// get all posts
-    func getAllPosts(handler: @escaping ([[String : Any]]) -> Void,
+    func getAllPosts(handler: @escaping ([Post]) -> Void,
                      failure: @escaping (String) -> Void) {
         let postRef = dataBase.collection("Post")
         postRef.getDocuments { querySnapshot, error in
@@ -109,7 +111,12 @@ final class FirebaseService {
                 let post = documets.data()
                 return post
             })
-            handler(posts!)
+
+            let arrayPost = posts?.map({ dictPost in
+                let post = Post(postData: dictPost)
+                return post
+            })
+            handler(arrayPost!)
 
         }
     }

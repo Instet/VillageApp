@@ -132,7 +132,8 @@ extension FavoritesViewController: UITableViewDataSource {
         var postData: [String : Any] = [:]
         postData.updateValue((fetchPost.author ?? "") as String, forKey: "author")
         postData.updateValue((fetchPost.post ?? "") as String, forKey: "post")
-        favoritPost.configCell(userPost: postData)
+        let post = Post(postData: postData)
+        favoritPost.configCell(userPost: post)
         return favoritPost
 
     }
