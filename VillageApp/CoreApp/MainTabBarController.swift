@@ -12,7 +12,7 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
     var presentor: AppPresenterProtocol?
     var coordinator: AppCoordinatorProtocol?
 
-    var userData: [String : Any]
+    var user: User
 
     private lazy var homeNC: UINavigationController = {
         let homeVC = HomeViewController()
@@ -27,7 +27,7 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
     }()
 
     private lazy var profileNC: UINavigationController = {
-        let profileVC = ProfileViewController(presentor: presentor ,userData: userData)
+        let profileVC = ProfileViewController(presentor: presentor ,user: user)
         profileVC.coordinator = coordinator
         presentor?.coordinator = coordinator
         let navigation = UINavigationController(rootViewController: profileVC)
@@ -50,8 +50,8 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
 
     // MARK: - Init
 
-    init(presenter: AppPresenterProtocol?, coordinator: AppCoordinatorProtocol, userData: [String : Any]) {
-        self.userData = userData
+    init(presenter: AppPresenterProtocol?, coordinator: AppCoordinatorProtocol, user: User) {
+        self.user = user
         self.presentor = presenter
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)

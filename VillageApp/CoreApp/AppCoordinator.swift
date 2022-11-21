@@ -14,7 +14,7 @@ protocol AppCoordinatorProtocol: AnyObject {
 
     func addPostPresent(presentor: AppPresenterProtocol?,
                         coordinator: AppCoordinatorProtocol?,
-                        userData: [String : Any])
+                        user: User)
     func pushPhotoView(presentor: AppPresenterProtocol?,
                        coordinator: AppCoordinatorProtocol?)
 
@@ -32,11 +32,11 @@ final class AppCoordinator: AppCoordinatorProtocol {
 
     func addPostPresent(presentor: AppPresenterProtocol?,
                         coordinator: AppCoordinatorProtocol?,
-                        userData: [String : Any]) {
+                        user: User) {
         let vc = AddPostViewController()
         vc.presentor = presentor
         vc.coordinator = coordinator
-        vc.userData = userData
+        vc.user = user
         vc.modalPresentationStyle = .automatic
         navigationController?.present(vc, animated: true)
     }

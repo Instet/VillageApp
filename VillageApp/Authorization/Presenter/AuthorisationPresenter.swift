@@ -73,12 +73,12 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
                                actions: [("Ok", UIAlertAction.Style.cancel, nil)])
         }
 
-        let handler: (([String : Any])?) -> Void = { [weak self] user in
+        let handler: (User?) -> Void = { [weak self] user in
             guard let self = self else { return }
             if user == nil {
                 self.coordinator?.registationData()
             } else {
-                self.coordinator?.startApp(userData: user!)
+                self.coordinator?.startApp(user: user!)
             }
         }
 
@@ -114,13 +114,13 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
             UserDefaults.standard.set(true, forKey: "isRegistred")
         }
         getUserData { user in
-            self.coordinator?.startApp(userData: user)
+            self.coordinator?.startApp(user: user)
         }
     }
 
 
 
-    private func getUserData(completion: @escaping ([String : Any]) -> Void) {
+    private func getUserData(completion: @escaping (User) -> Void) {
 
         let failure: (String) -> Void = { [weak self] error in
             guard let self = self else { return }
@@ -129,7 +129,7 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
                                preferredStyle: .alert,
                                actions: [("Ok", UIAlertAction.Style.cancel, nil)])
         }
-        let handler: (([String : Any])?) -> Void = {  user in
+        let handler: (User?) -> Void = {  user in
             completion(user!)
         }
         backendService.getUserByPhone(phone: AuthorisationPresenter.phoneNumber, handler: handler, failure: failure)

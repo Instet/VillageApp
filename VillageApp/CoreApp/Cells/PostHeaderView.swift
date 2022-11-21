@@ -11,7 +11,7 @@ class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
 
     var presentor: AppPresenterProtocol?
     var coordinator: AppCoordinatorProtocol?
-    var userData =  [String : Any]()
+    var user: User?
 
     private let viewElements: ViewElements = ViewElements.shared
 
@@ -58,16 +58,17 @@ class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
 
 
     @objc func addPost() {
+        guard let user = user else { return }
         coordinator?.addPostPresent(presentor: presentor,
                                     coordinator: coordinator,
-                                    userData: userData)
+                                    user: user)
     }
 
     func assemblyHeader(presentor: AppPresenterProtocol?,
                         coordinator: AppCoordinatorProtocol?,
-                        userData: [String : Any]) {
+                        user: User) {
         self.presentor = presentor
-        self.userData = userData
+        self.user = user
         self.coordinator = coordinator
     }
 

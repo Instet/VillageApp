@@ -11,7 +11,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
 
     weak var presentor: AppPresenterProtocol?
     weak var coordinator: AppCoordinatorProtocol?
-    var userData =  [String : Any]()
+    var user: User?
     var userPost = [String : Any]()
     
 
@@ -85,8 +85,9 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
 
 
     @objc private func saveUserPost() {
-        let author = (userData["name"] as? String ?? "Test") + " " + (userData["lastName"] as? String ?? "Test")
-        let userPhone = userData["phone"] as? String ?? "+7(999)987-65-45"
+        guard let user = user else { return }
+        let author = user.name + " " + user.lastName
+        let userPhone = user.phone
         guard let post = postTextView.text else { return }
         userPost.updateValue(post, forKey: "post")
         userPost.updateValue(author, forKey: "author")

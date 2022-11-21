@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 //        let presenter = AppPresentor()
 //        let coordinator = AppCoordinator()
-//        let main = MainTabBarController(presenter: presenter, coordinator: coordinator, userData: [String : Any]())
+//        let user = User(data: [:])
+//        let main = MainTabBarController(presenter: presenter, coordinator: coordinator, user: user)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

@@ -23,7 +23,7 @@ protocol AppPresenterProtocol: AnyObject {
     var images: [UIImage] { get set }
 
     func addPost(userPost: [String : Any])
-    func getPostForUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void)
+    func getPostForUser(user: User, completion: @escaping ([[String : Any]]) -> Void)
     func getAllPost(completion: @escaping ([[String : Any]]) -> Void)
     func getImage()
 
@@ -56,7 +56,7 @@ final class AppPresentor: AppPresenterProtocol {
 
 
 
-    func getPostForUser(userData: [String : Any], completion: @escaping ([[String : Any]]) -> Void) {
+    func getPostForUser(user: User, completion: @escaping ([[String : Any]]) -> Void) {
         let failure: (String) -> Void = { [weak self] error in
             guard let self = self else { return }
             self.failureAlert(title: error,
@@ -69,8 +69,8 @@ final class AppPresentor: AppPresenterProtocol {
             completion(posts)
 
         }
-        let userPhone = userData["phone"] as? String ?? "+7(999)987-65-45"
-        backendService.getPostsForUser(userPhone: userPhone, handler: handler, failure: failure)
+        //let userPhone = userData["phone"] as? String ?? "+7(999)987-65-45"
+        backendService.getPostsForUser(userPhone: user.phone, handler: handler, failure: failure)
     }
 
 

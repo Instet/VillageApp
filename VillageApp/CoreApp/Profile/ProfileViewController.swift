@@ -11,7 +11,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
 
     weak var presentor: AppPresenterProtocol?
     weak var coordinator: AppCoordinatorProtocol?
-    var userData: [String : Any]
+    var user: User
     var postData = [String : Any]()
     var array: [[String : Any]]?
 
@@ -41,9 +41,9 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
 
     // MARK: - Init
 
-    init(presentor: AppPresenterProtocol?, userData: [String : Any]) {
+    init(presentor: AppPresenterProtocol?, user: User) {
         self.presentor = presentor
-        self.userData = userData
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -69,7 +69,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         presentor?.delegate = self
         setupLayout()
 
-        presentor?.getPostForUser(userData: userData, completion: {  posts in
+        presentor?.getPostForUser(user: user, completion: {  posts in
             self.array = posts
             
             DispatchQueue.main.async {
@@ -104,7 +104,7 @@ extension ProfileViewController: UITableViewDelegate {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: PostHeaderView.self)) as? PostHeaderView else { return nil}
         header.assemblyHeader(presentor: presentor,
                               coordinator: coordinator,
-                              userData: userData)
+                              user: user)
         return header
     }
 
@@ -136,7 +136,7 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             guard let profileCell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileTableViewCell.self)) as? ProfileTableViewCell else { return UITableViewCell() }
 
-            profileCell.configUserData(user: userData)
+            profileCell.configUserData(user: user)
 
             profileCell.callback = {
                 tableView.reloadData()
@@ -172,7 +172,7 @@ extension ProfileViewController: AppPresentorDelegate {
 
     func didUpdatePost() {
         activityIndicator.startAnimating()
-        presentor?.getPostForUser(userData: userData, completion: {  posts in
+        presentor?.getPostForUser(user: user, completion: {  posts in
             self.array = posts
             DispatchQueue.main.async {
                 self.profileTableView.reloadData()

@@ -57,7 +57,7 @@ final class FirebaseService {
     
     /// get user by number phone
     func getUserByPhone(phone: String,
-                        handler: @escaping (([String : Any])?) -> Void,
+                        handler: @escaping (User?) -> Void,
                         failure: @escaping (String) -> Void) {
         let userRef =  dataBase.collection("User")
         let query = userRef.whereField("phone", isEqualTo: phone)
@@ -68,7 +68,8 @@ final class FirebaseService {
             } else {
                 var document = querySnapshot?.documents[0].data()
                 document?.updateValue(querySnapshot!.documents[0].documentID, forKey: "id")
-                handler(document)
+                let currentUser = User(data: document!)
+                handler(currentUser)
             }
         }
     }

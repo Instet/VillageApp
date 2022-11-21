@@ -16,7 +16,7 @@ protocol CoordinatorProtocol {
     func confirmView(phone: String)
     func logInView()
     func registationData()
-    func startApp(userData: [String : Any])
+    func startApp(user: User)
 
 }
 
@@ -80,10 +80,10 @@ final class AuthorizationCoordinator: CoordinatorProtocol {
         navigationController?.viewControllers = [vc]
     }
 
-    func startApp(userData: [String : Any]) {
+    func startApp(user: User) {
         let presenter = AppPresentor()
         let coordinator = AppCoordinator()
-        let mainTabBar = MainTabBarController(presenter: presenter, coordinator: coordinator, userData: userData)
+        let mainTabBar = MainTabBarController(presenter: presenter, coordinator: coordinator, user: user)
         navigationController?.viewControllers = [mainTabBar]
     }
 

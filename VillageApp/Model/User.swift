@@ -18,12 +18,12 @@ class User {
 
     init(data: [String : Any]) {
         self.id = data["id"] as? String ?? ""
-        self.birthday = data["birthday"] as? String ?? ""
-        self.name = data["name"] as? String ?? ""
-        self.lastName = data["lastName"] as? String ?? ""
-        self.city = data["city"] as? String ?? ""
+        self.birthday = data["birthday"] as? String ?? "21.11.2022"
+        self.name = data["name"] as? String ?? "User"
+        self.lastName = data["lastName"] as? String ?? "Model"
+        self.city = data["city"] as? String ?? "Samara"
         self.isMale = data["isMale"] as? Bool ?? true
-        self.phone = data["phone"] as? String ?? ""
+        self.phone = data["phone"] as? String ?? "+7(999)987-65-45"
     }
 
    
