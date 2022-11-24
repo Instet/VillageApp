@@ -93,6 +93,7 @@
 		DB89598D2917C15D00D370B7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DBC0A4A32928E41200A10DC8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DBC0A4A62928E46100A10DC8 /* AppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppModel.xcdatamodel; sourceTree = "<group>"; };
+		DBCB4ED229300FF50081DF8F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		DBE9C4EF2920FC2A00AB525C /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		DBE9C4F1292170EC00AB525C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DBE9C4F32921752100AB525C /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -373,6 +374,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = DB895952291561FF00D370B7;
 			packageReferences = (
@@ -458,6 +460,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DB89596A2915620100D370B7 /* Base */,
+				DBCB4ED229300FF50081DF8F /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

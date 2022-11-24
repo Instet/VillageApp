@@ -37,3 +37,9 @@ enum StringSet: String {
     case emptyFavoritPost = "Здесь пусто"
 
 }
+
+extension StringSet.RawValue {
+    var rawValue: String {
+        self.localized
+    }
+}
