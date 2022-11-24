@@ -31,7 +31,7 @@ protocol AppPresenterProtocol: AnyObject {
     func requestAuthorisation(completion: @escaping () -> Void)
 }
 
-// Добавить метод удаление
+// Добавить метод удаления
 // cортировка постов по дате
 // добавить возможность сохранения фото
 // локализация приложения

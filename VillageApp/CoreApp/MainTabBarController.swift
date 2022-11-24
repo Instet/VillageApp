@@ -20,6 +20,7 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
         homeVC.coordinator = coordinator
         presentor?.coordinator = coordinator
         let navigation = UINavigationController(rootViewController: homeVC )
+        navigation.navigationItem.accessibilityElementsHidden = true
         navigation.tabBarItem = UITabBarItem(title: "Главная",
                                              image: UIImage(.houseOrange),
                                              selectedImage: UIImage(.houseOrange))
@@ -77,8 +78,6 @@ class MainTabBarController: UITabBarController, ViewAppProtocol {
         tabBar.backgroundColor = .systemBackground
         tabBar.tintColor = UIColor(.orange)
         viewControllers = [homeNC, profileNC, favoritesNC]
-
-
     }
     
 

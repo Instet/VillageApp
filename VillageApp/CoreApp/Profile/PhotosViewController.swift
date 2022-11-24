@@ -16,14 +16,6 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
     weak var coordinator: AppCoordinatorProtocol?
     private let fileManager = FileManagerService()
 
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.color = UIColor(.mainColor)
-        indicator.style = .medium
-        indicator.startAnimating()
-        return indicator
-    }()
-
 
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -42,15 +34,8 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
 
 
     // MARK: - Functions
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presentor?.getImage()
-        DispatchQueue.main.async {
-            self.photosCollection.reloadData()
-            self.activityIndicator.stopAnimating()
-        }
-
     }
 
 
@@ -59,7 +44,6 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
         setupLayout()
         photosCollection.delegate = self
         photosCollection.dataSource = self
-
     }
 
     private func setupLayout() {
@@ -72,7 +56,7 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
                                         action: #selector(addPhoto))
         navigationItem.rightBarButtonItem = addButton
 
-        view.addSubviews(photosCollection, activityIndicator)
+        view.addSubviews(photosCollection)
 
         NSLayoutConstraint.activate([
             photosCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -80,8 +64,6 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
             photosCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             photosCollection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
 
     }
@@ -117,10 +99,8 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        DispatchQueue.main.async { [weak self ] in
-            self?.coordinator?.showPhoto(images: self?.presentor?.images, index: indexPath.item)
-
-        }
+        collectionView.presentationSectionIndex(forDataSourceSectionIndex: indexPath.row)
+            coordinator?.showPhoto(images: presentor?.images, index: indexPath.row)
     }
 
 }
@@ -138,7 +118,8 @@ extension PhotosViewController: PHPickerViewControllerDelegate {
             result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                 if let image = image as? UIImage {
                     self.fileManager.createFile(image) { [weak self] in
-                        self?.presentor?.getImage()
+                        guard let self = self else { return }
+                        self.presentor?.getImage()
                     }
                     DispatchQueue.main.async {
                         self.photosCollection.reloadData()

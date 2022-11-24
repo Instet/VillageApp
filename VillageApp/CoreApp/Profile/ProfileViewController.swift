@@ -8,14 +8,14 @@
 import UIKit
 
 class ProfileViewController: UIViewController, ViewAppProtocol {
-
+    
     weak var presentor: AppPresenterProtocol?
     weak var coordinator: AppCoordinatorProtocol?
     var user: User
     var postData = [String : Any]()
     var array: [Post]?
-
-
+    
+    
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.color = UIColor(.mainColor)
@@ -23,8 +23,8 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         indicator.startAnimating()
         return indicator
     }()
-
-
+    
+    
     private lazy var profileTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: String(describing: ProfileTableViewCell.self))
@@ -38,29 +38,29 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
-
+    
     // MARK: - Init
-
+    
     init(presentor: AppPresenterProtocol?, user: User) {
         self.presentor = presentor
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
     // MARK: - Functions
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presentor?.getImage()
         profileTableView.reloadData()
-
+        
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -68,7 +68,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         profileTableView.dataSource = self
         presentor?.delegate = self
         setupLayout()
-
+        
         presentor?.getPostForUser(user: user, completion: {  posts in
             self.array = posts
             
@@ -79,7 +79,10 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         })
     }
 
+
+
     private func setupLayout() {
+
         view.addSubviews(profileTableView, activityIndicator)
 
         NSLayoutConstraint.activate([
@@ -180,7 +183,6 @@ extension ProfileViewController: AppPresentorDelegate {
             }
         })
     }
-
 
 }
 
