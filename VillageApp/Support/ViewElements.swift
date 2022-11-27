@@ -15,7 +15,7 @@ final class ViewElements {
 
     func getButton(name: StringSet) -> UIButton {
         let button = UIButton()
-        button.setTitle(name.rawValue, for: .normal)
+        button.setTitle(name.localizedString(), for: .normal)
         button.setTitleColor(.systemBackground, for: .normal)
         button.backgroundColor = UIColor(.mainColor)
         button.layer.cornerRadius = 10
@@ -32,7 +32,7 @@ final class ViewElements {
                    cornerRadius: CGFloat = 0,
                    isShadow: Bool = false) -> UIButton {
         let button = UIButton()
-        button.setTitle(name.rawValue, for: .normal)
+        button.setTitle(name.localizedString(), for: .normal)
         button.setTitleColor(textColor, for: .normal)
         button.backgroundColor = backroundColor
         button.layer.cornerRadius = cornerRadius
@@ -52,7 +52,7 @@ final class ViewElements {
                   weight: UIFont.Weight = .regular,
                   textAlignment: NSTextAlignment = .center) -> UILabel {
         let label = UILabel()
-        label.text = text.rawValue
+        label.text = text.localizedString()
         label.font = .systemFont(ofSize: size, weight: weight)
         label.textAlignment = textAlignment
         label.textColor = textColor

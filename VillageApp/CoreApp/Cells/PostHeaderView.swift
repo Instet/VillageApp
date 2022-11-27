@@ -62,13 +62,6 @@ class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
         coordinator?.addPostPresent(presentor: presentor,
                                     user: user)
     }
-//
-//    func assemblyHeader(presentor: AppPresenterProtocol?,
-//                        //coordinator: ProfileCoordinator?,
-//                        user: User) {
-//        self.presentor = presentor
-//        self.user = user
-//        //self.coordinator = coordinator
-//    }
+
 
 }

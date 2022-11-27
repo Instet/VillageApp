@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
 
     private func setupLayout() {
 
-        let barButton = UIBarButtonItem(title: "Выход",
+        let barButton = UIBarButtonItem(title: StringSet.exitString.localizedString(),
                                         style: .plain,
                                         target: self,
                                         action: #selector(exitProfile))

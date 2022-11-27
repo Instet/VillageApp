@@ -126,7 +126,9 @@ extension PhotosViewController: PHPickerViewControllerDelegate {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Ошибка", message: "Неверный формат", preferredStyle: .alert)
+                        let alert = UIAlertController(title: StringSet.error.localizedString(),
+                                                      message: StringSet.formatWrong.localizedString(),
+                                                      preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .default))
                         self.present(alert, animated: true)
                     }

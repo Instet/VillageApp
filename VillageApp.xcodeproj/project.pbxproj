@@ -28,6 +28,7 @@
 		DB83289D29325A8700E60C8C /* BuilderModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83289C29325A8700E60C8C /* BuilderModule.swift */; };
 		DB83289F29325C3C00E60C8C /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB83289E29325C3C00E60C8C /* HomeCoordinator.swift */; };
 		DB8328A129325F6900E60C8C /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8328A029325F6900E60C8C /* FavoritesCoordinator.swift */; };
+		DB853E922933642000C3F782 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DB853E942933642000C3F782 /* Localizable.stringsdict */; };
 		DB89595F291561FF00D370B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89595E291561FF00D370B7 /* AppDelegate.swift */; };
 		DB895961291561FF00D370B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB895960291561FF00D370B7 /* SceneDelegate.swift */; };
 		DB895963291561FF00D370B7 /* FirstEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB895962291561FF00D370B7 /* FirstEnterViewController.swift */; };
@@ -81,6 +82,8 @@
 		DB83289C29325A8700E60C8C /* BuilderModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderModule.swift; sourceTree = "<group>"; };
 		DB83289E29325C3C00E60C8C /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB8328A029325F6900E60C8C /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		DB853E932933642000C3F782 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		DB853E962933647E00C3F782 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		DB89595B291561FF00D370B7 /* VillageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VillageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB89595E291561FF00D370B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB895960291561FF00D370B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +247,7 @@
 		DB895952291561FF00D370B7 = {
 			isa = PBXGroup;
 			children = (
+				DB853E942933642000C3F782 /* Localizable.stringsdict */,
 				DB89595D291561FF00D370B7 /* VillageApp */,
 				DB89595C291561FF00D370B7 /* Products */,
 			);
@@ -400,8 +404,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				ru,
 				Base,
+				ru,
 			);
 			mainGroup = DB895952291561FF00D370B7;
 			packageReferences = (
@@ -422,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB89596B2915620100D370B7 /* LaunchScreen.storyboard in Resources */,
+				DB853E922933642000C3F782 /* Localizable.stringsdict in Resources */,
 				DB8959682915620100D370B7 /* Assets.xcassets in Resources */,
 				DB400C5E2918214100CE2A6F /* GoogleService-Info.plist in Resources */,
 			);
@@ -487,6 +492,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		DB853E942933642000C3F782 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB853E932933642000C3F782 /* en */,
+				DB853E962933647E00C3F782 /* ru */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		DB8959692915620100D370B7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

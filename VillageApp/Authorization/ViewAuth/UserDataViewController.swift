@@ -32,7 +32,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
                                                        weight: .medium,
                                                        textAlignment: .left)
 
-    private lazy var nameTextField = viewElements.getTextFieldForReg(placeholder: "Имя")
+    private lazy var nameTextField = viewElements.getTextFieldForReg(placeholder: StringSet.name.localizedString())
 
     private lazy var lastNameLabel = viewElements.getLabel(text: .lastName,
                                                            size: 12,
@@ -40,7 +40,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
                                                            weight: .medium,
                                                            textAlignment: .left)
 
-    private lazy var lastNameTextField = viewElements.getTextFieldForReg(placeholder: "Фамилия")
+    private lazy var lastNameTextField = viewElements.getTextFieldForReg(placeholder: StringSet.lastName.localizedString())
 
     private lazy var genderLabel = viewElements.getLabel(text: .gender,
                                                        size: 12,
@@ -62,14 +62,14 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
                                                            weight: .medium,
                                                            textAlignment: .left)
 
-    private lazy var cityTextField = viewElements.getTextFieldForReg(placeholder: "Город")
+    private lazy var cityTextField = viewElements.getTextFieldForReg(placeholder: StringSet.city.localizedString())
 
     private lazy var isMaleButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "circle")?.withTintColor(.createColor(lightMode: .darkText, darkMode: .lightText),
                                                                      renderingMode: .alwaysOriginal), for: .normal)
         button.setImage(UIImage(systemName: "circle.inset.filled")?.withTintColor(UIColor(.orange)!, renderingMode: .alwaysOriginal), for: .selected)
-        button.setTitle("  мужской", for: .normal)
+        button.setTitle(" " + StringSet.male.localizedString(), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(UIColor.createColor(lightMode: .darkText, darkMode: .lightText),
                              for: .normal)
@@ -83,7 +83,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
                                                                      renderingMode: .alwaysOriginal), for: .normal)
         button.setImage(UIImage(systemName: "circle.inset.filled")?.withTintColor(UIColor(.orange)!,
                                                                                   renderingMode: .alwaysOriginal),   for: .selected)
-        button.setTitle("  женский", for: .normal)
+        button.setTitle(" " + StringSet.female.localizedString(), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(UIColor.createColor(lightMode: .darkText, darkMode: .lightText),
                              for: .normal)
@@ -127,7 +127,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
 
     private func setupLayout() {
         view.backgroundColor = .systemBackground
-        self.title = "Основная информация"
+        self.title = StringSet.basicInfo.localizedString()
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
         contentView.addSubviews(nameLabel, nameTextField, lastNameLabel,

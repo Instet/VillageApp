@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>registrationString</key>
+	<string>REGISTER</string>
+	<key>hasAccountString</key>
+	<string>Already have an account</string>
+	<key>nextString</key>
+	<string>Next</string>
+	<key>enterNumberString</key>
+	<string>Enter number</string>
+	<key>numberForString</key>
+	<string>Your number will be used to log into your account</string>
+	<key>termsOfUse</key>
+	<string>By clicking the &quot;Next&quot; button you accept the User Agreement and Privacy Policy</string>
+	<key>confirmRegString</key>
+	<string>Confirmation of registration</string>
+	<key>logIn</key>
+	<string>Log In</string>
+	<key>smsString</key>
+	<string>We sent an SMS with a code to the number</string>
+	<key>enterSMS</key>
+	<string>Enter code from SMS</string>
+	<key>greatingString</key>
+	<string>Welcome back</string>
+	<key>enterNumberForApp</key>
+	<string>Enter your phone number to enter the application</string>
+	<key>confirmString</key>
+	<string>Confirm</string>
+	<key>noNameString</key>
+	<string>No Name</string>
+	<key>name</key>
+	<string>Name</string>
+	<key>lastName</key>
+	<string>Surname</string>
+	<key>gender</key>
+	<string>Gender</string>
+	<key>birthday</key>
+	<string>Date of Birth</string>
+	<key>city</key>
+	<string>City</string>
+	<key>editString</key>
+	<string>Edit</string>
+	<key>photos</key>
+	<string>Photo</string>
+	<key>photosIsEmty</key>
+	<string>There are no photos</string>
+	<key>myPosts</key>
+	<string>My notes</string>
+	<key>allPosts</key>
+	<string>All posts</string>
+	<key>myPhotos</key>
+	<string>My photos</string>
+	<key>emptyFavoritPost</key>
+	<string>It&apos;s empty here</string>
+	<key>exitString</key>
+	<string>Exit</string>
+	<key>titleHome</key>
+	<string>Home</string>
+	<key>titleFavorites</key>
+	<string>Favorites</string>
+	<key>info</key>
+	<string> Detailed info</string>
+	<key>infoHidden</key>
+	<string> Hide info</string>
+	<key>male</key>
+	<string>Male</string>
+	<key>female</key>
+	<string>Female</string>
+	<key>savePost</key>
+	<string>Publish</string>
+	<key>cancelSave</key>
+	<string>Cancel</string>
+	<key>basicInfo</key>
+	<string>Basic Information</string>
+	<key>failedNumber</key>
+	<string>Wrong number dialed</string>
+	<key>failedCode</key>
+	<string>Incorrect code</string>
+	<key>failedCodeDescript</key>
+	<string>Verification code must be 6 digits</string>
+	<key>error</key>
+	<string>Error</string>
+	<key>errorDescript</key>
+	<string>Fill in all the fields</string>
+	<key>titleProfile</key>
+	<string>Profile</string>
+	<key>formatWrong</key>
+	<string>Wrong format</string>
+	<key>accessFailed</key>
+	<string>Access denied</string>
+	<key>accessFailedDescript</key>
+	<string>The app needs access to the photo library</string>
+	<key>StringKey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@VARIABLE@</string>
+		<key>VARIABLE</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string></string>
+			<key>zero</key>
+			<string></string>
+			<key>one</key>
+			<string></string>
+			<key>two</key>
+			<string></string>
+			<key>few</key>
+			<string></string>
+			<key>many</key>
+			<string></string>
+			<key>other</key>
+			<string></string>
+		</dict>
+	</dict>
+</dict>
+</plist>

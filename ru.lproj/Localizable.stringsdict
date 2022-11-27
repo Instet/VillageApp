@@ -2,8 +2,96 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ЗАРЕГИСТРИРОВАТЬСЯ</key>
-	<string>REGISTER</string>
+	<key>registrationString</key>
+	<string>ЗАРЕГИСТРИРОВАТЬСЯ</string>
+	<key>hasAccountString</key>
+	<string>Уже есть аккаунт</string>
+	<key>nextString</key>
+	<string>Далее</string>
+	<key>enterNumberString</key>
+	<string>Введите номер</string>
+	<key>numberForString</key>
+	<string>Ваш номер будет использоваться для входа в аккаунт</string>
+	<key>termsOfUse</key>
+	<string>Нажимая кнопку “Далее” Вы принимаете пользовательское Соглашение и политику конфедициальности</string>
+	<key>confirmRegString</key>
+	<string>Подтверждение регистрации</string>
+	<key>logIn</key>
+	<string>Вход</string>
+	<key>smsString</key>
+	<string>Мы отправили SMS с кодом на номер</string>
+	<key>enterSMS</key>
+	<string>Введите код из SMS</string>
+	<key>greatingString</key>
+	<string>С возвращением</string>
+	<key>enterNumberForApp</key>
+	<string>Введите номер телефона для входа в приложение</string>
+	<key>confirmString</key>
+	<string>Подтвердить</string>
+	<key>noNameString</key>
+	<string>Нет имени</string>
+	<key>name</key>
+	<string>Имя</string>
+	<key>lastName</key>
+	<string>Фамилия</string>
+	<key>gender</key>
+	<string>Пол</string>
+	<key>birthday</key>
+	<string>Дата рождения</string>
+	<key>city</key>
+	<string>Родной город</string>
+	<key>editString</key>
+	<string>Редактировать</string>
+	<key>photos</key>
+	<string>Фотографии</string>
+	<key>photosIsEmty</key>
+	<string>Нет фотографий</string>
+	<key>myPosts</key>
+	<string>Мои записи</string>
+	<key>allPosts</key>
+	<string>Все посты</string>
+	<key>myPhotos</key>
+	<string>Мои фотографии</string>
+	<key>emptyFavoritPost</key>
+	<string>Здесь пусто</string>
+	<key>exitString</key>
+	<string>Выход</string>
+	<key>titleHome</key>
+	<string>Главная</string>
+	<key>titleFavorites</key>
+	<string>Избранное</string>
+	<key>info</key>
+	<string> Подробная информация</string>
+	<key>infoHidden</key>
+	<string> Скрыть информацию</string>
+	<key>male</key>
+	<string>Мужской</string>
+	<key>female</key>
+	<string>Женский</string>
+	<key>savePost</key>
+	<string>Сохранить</string>
+	<key>cancelSave</key>
+	<string>Отмена</string>
+	<key>basicInfo</key>
+	<string>Основная информация</string>
+	<key>failedNumber</key>
+	<string>Неправильно набран номер</string>
+	<key>failedCode</key>
+	<string>Неверный код</string>
+	<key>failedCodeDescript</key>
+	<string>Код верификации должен состоять из 6 цифр</string>
+	<key>error</key>
+	<string>Ошибка</string>
+	<key>errorDescript</key>
+	<string>Заполните все поля</string>
+	<key>titleProfile</key>
+	<string>Профиль</string>
+	<key>formatWrong</key>
+	<string>Неверный формат</string>
+	<key>accessFailed</key>
+	<string>В доступе отказано</string>
+	<key>accessFailedDescript</key>
+	<string>Приложению нужен доступ к библиотеке фотографии</string>
 	<key>StringKey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

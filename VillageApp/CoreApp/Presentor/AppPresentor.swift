@@ -37,7 +37,6 @@ protocol AppPresenterProtocol: AnyObject {
 // Добавить метод удаления
 // cортировка постов по дате
 // добавить возможность сохранения фото
-// локализация приложения
 
 final class AppPresentor: AppPresenterProtocol {
 
@@ -137,8 +136,8 @@ final class AppPresentor: AppPresenterProtocol {
 
 
     private func alertForRequstAuthPH() {
-        failureAlert(title: "В доступе отказано",
-                     message: "Приложению нужен доступ к библиотеке фотографии",
+        failureAlert(title: StringSet.accessFailed.localizedString(),
+                     message: StringSet.accessFailedDescript.localizedString(),
                      preferredStyle: .alert,
                      actions: [("Ok", UIAlertAction.Style.default, nil)])
     }

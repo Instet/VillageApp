@@ -30,7 +30,7 @@ final class ProfileTableViewCell: UITableViewCell {
     private lazy var detailInfoButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(.info), for: .normal)
-        button.setTitle(" Подробная информация", for: .normal)
+        button.setTitle(StringSet.info.localizedString(), for: .normal)
         button.setTitleColor(UIColor.createColor(lightMode: .darkText, darkMode: .lightText),
                              for: .normal)
         button.addTarget(self, action: #selector(tapDetailInfo), for: .touchUpInside)
@@ -126,7 +126,7 @@ final class ProfileTableViewCell: UITableViewCell {
                                     cityLabel, birthdayLabelTitle,
                                     birthdayLabel, genderLabelTitle,
                                     genderLabel)
-            detailInfoButton.setTitle(" Скрыть информацию", for: .normal)
+            detailInfoButton.setTitle(StringSet.infoHidden.localizedString(), for: .normal)
 
             NSLayoutConstraint.activate([
                 detailInfoButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: Constants.topIndentSix),
@@ -160,7 +160,7 @@ final class ProfileTableViewCell: UITableViewCell {
             genderLabelTitle.removeFromSuperview()
             genderLabel.removeFromSuperview()
             setupLayout()
-            detailInfoButton.setTitle(" Подробная информация", for: .normal)
+            detailInfoButton.setTitle(StringSet.info.localizedString(), for: .normal)
 
         }
         self.callback!()
@@ -175,9 +175,9 @@ final class ProfileTableViewCell: UITableViewCell {
 
         let gender = user.isMale
         if gender {
-            genderLabel.text = "Мужской"
+            genderLabel.text = StringSet.male.localizedString()
         } else {
-            genderLabel.text = "Женский"
+            genderLabel.text = StringSet.female.localizedString()
         }
     }
     
