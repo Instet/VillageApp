@@ -12,8 +12,8 @@ import PhotosUI
 
 class PhotosViewController: UIViewController, ViewAppProtocol {
 
-    weak var presentor: AppPresenterProtocol?
-    weak var coordinator: AppCoordinatorProtocol?
+    var presentor: AppPresenterProtocol?
+    var coordinator: ProfileCoordinator?
     private let fileManager = FileManagerService()
 
 

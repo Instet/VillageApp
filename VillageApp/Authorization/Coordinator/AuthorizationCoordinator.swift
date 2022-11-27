@@ -7,11 +7,13 @@
 
 import UIKit
 
-protocol CoordinatorProtocol {
+protocol AuthorizationCoordinatirProtocol {
 
     var navigationController: UINavigationController? { get set }
+    var callback: (User?) -> () { get set }
 
-    func start()
+
+    func start(coordinator: AuthorizationCoordinatirProtocol) -> UINavigationController?
     func regView()
     func confirmView(phone: String)
     func logInView()
@@ -21,32 +23,29 @@ protocol CoordinatorProtocol {
 }
 
 
-final class AuthorizationCoordinator: CoordinatorProtocol {
+final class AuthorizationCoordinator: AuthorizationCoordinatirProtocol {
 
 
     var navigationController: UINavigationController?
+    var callback: (User?) -> ()
 
     // MARK: - Init
 
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController?,
+         callback: @escaping (User?) -> Void) {
+        self.callback = callback
         self.navigationController = navigationController
     }
 
-
     // MARK: - Functions
 
-    func start() {
-        if UserDefaults.standard.bool(forKey: "isRegistred") == true {
-            let presenter = AuthorisationPresenter(coordinator: self)
-            let vc = LogInViewController()
-            vc.presenter = presenter
-            navigationController?.viewControllers = [vc]
-        } else {
-            let vc = FirstEnterViewController()
-            vc.coordinator = self
-            navigationController?.viewControllers = [vc]
-        }
+    func start(coordinator: AuthorizationCoordinatirProtocol) -> UINavigationController? {
+        let firstVC = FirstEnterViewController()
+        firstVC.coordinator = coordinator
+        navigationController = UINavigationController(rootViewController: firstVC)
+        return navigationController
     }
+
 
     func regView() {
         let presenter = AuthorisationPresenter(coordinator: self)
@@ -81,10 +80,9 @@ final class AuthorizationCoordinator: CoordinatorProtocol {
     }
 
     func startApp(user: User) {
-        let presenter = AppPresentor()
-        let coordinator = AppCoordinator()
-        let mainTabBar = MainTabBarController(presenter: presenter, coordinator: coordinator, user: user)
-        navigationController?.viewControllers = [mainTabBar]
+        callback(user)
+
+
     }
 
 

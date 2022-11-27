@@ -7,13 +7,10 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, ViewAppProtocol {
+class HomeViewController: UIViewController {
 
-    weak var presentor: AppPresenterProtocol?
-    weak var coordinator: AppCoordinatorProtocol?
+    var presentor: AppPresenterProtocol?
     var arrayAllPosts: [Post]?
-    
-
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -33,6 +30,18 @@ class HomeViewController: UIViewController, ViewAppProtocol {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
+
+    // MARK: - Init
+    init(presentor: AppPresenterProtocol?) {
+        self.presentor = presentor
+        super.init(nibName: nil, bundle: nil)
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 
     // MARK: - Functions
 

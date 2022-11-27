@@ -9,8 +9,8 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
 
-    weak var presentor: AppPresenterProtocol?
-    weak var coordinator: AppCoordinatorProtocol?
+    var presentor: AppPresenterProtocol?
+    var coordinator: ProfileCoordinator?
     
     private let viewElements: ViewElements = ViewElements.shared
 
@@ -45,7 +45,7 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
         return stack
     }()
 
-     private lazy var imageViewArray: [UIImageView] = {
+    private lazy var imageViewArray: [UIImageView] = {
         var array = [UIImageView]()
         for _ in 1...4 {
             let imageView = UIImageView()
@@ -95,8 +95,8 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
     @objc private func pushTap() {
-        coordinator?.pushPhotoView(presentor: presentor,
-                                   coordinator: coordinator)
+        guard let presentor = presentor else { return }
+        coordinator?.pushPhotoView(presentor: presentor)
         
     }
 
@@ -115,11 +115,7 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
             countStatePhotosLabel.isHidden = true
             stackView.isHidden = false
         }
-
-
-
-
     }
 
-  
+
 }

@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import Photos
 import PhotosUI
+import Firebase
+import FirebaseAuth
 
 protocol AppPresentorDelegate: AnyObject {
 
@@ -18,7 +20,7 @@ protocol AppPresentorDelegate: AnyObject {
 
 protocol AppPresenterProtocol: AnyObject {
 
-    var coordinator: AppCoordinatorProtocol? { get set }
+    var coordinator: ProfileCoordinator? { get set }
     var delegate: AppPresentorDelegate? { get set }
     var images: [UIImage] { get set }
 
@@ -26,6 +28,7 @@ protocol AppPresenterProtocol: AnyObject {
     func getPostForUser(user: User, completion: @escaping ([Post]) -> Void)
     func getAllPost(completion: @escaping ([Post]) -> Void)
     func getImage()
+    func exitProfile()
 
     /// checking access to the photo library
     func requestAuthorisation(completion: @escaping () -> Void)
@@ -39,7 +42,7 @@ protocol AppPresenterProtocol: AnyObject {
 final class AppPresentor: AppPresenterProtocol {
 
     var delegate: AppPresentorDelegate?
-    var coordinator: AppCoordinatorProtocol?
+    var coordinator: ProfileCoordinator?
     private let fileManager = FileManagerService()
     var images: [UIImage] = []
 
@@ -51,7 +54,7 @@ final class AppPresentor: AppPresenterProtocol {
     func addPost(userPost: [String : Any]) {
         backendService.saveUserPost(dataPost: userPost)
         delegate?.didUpdatePost()
-        coordinator?.dismis()
+        coordinator?.dismiss()
     }
 
 
@@ -140,6 +143,15 @@ final class AppPresentor: AppPresenterProtocol {
                      actions: [("Ok", UIAlertAction.Style.default, nil)])
     }
 
+    func exitProfile() {
+        do {
+            try Auth.auth().signOut()
+            coordinator?.exitProfile()
+        } catch let error as NSError {
+            print(error.userInfo)
+        }
+    }
+
 
 }
 
@@ -169,4 +181,5 @@ extension AppPresentor {
         coordinator?.navigationController?.present(alertController, animated: true)
 
     }
+
 }

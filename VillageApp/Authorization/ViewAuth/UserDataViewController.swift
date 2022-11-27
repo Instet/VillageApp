@@ -32,7 +32,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
                                                        weight: .medium,
                                                        textAlignment: .left)
 
-    private lazy var nameTextField = viewElements.getTextFieldForReg(placeholder: "имя")
+    private lazy var nameTextField = viewElements.getTextFieldForReg(placeholder: "Имя")
 
     private lazy var lastNameLabel = viewElements.getLabel(text: .lastName,
                                                            size: 12,
@@ -98,6 +98,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let nc = NotificationCenter.default
+        tabBarController?.tabBar.isHidden = true
         nc.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
@@ -256,8 +257,8 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
 
 
     @objc private func cancelSaveUser() {
-        presenter?.coordinator?.start()
-        
+        presenter?.coordinator?.callback(nil)
+
     }
     
 }

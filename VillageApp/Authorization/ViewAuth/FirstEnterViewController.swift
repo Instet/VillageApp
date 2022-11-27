@@ -10,7 +10,7 @@ import UIKit
 final class FirstEnterViewController: UIViewController, ViewAuthorisationProtocol {
     
     var presenter: AuthorisationPresenterProtocol?
-    var coordinator: CoordinatorProtocol?
+    var coordinator: AuthorizationCoordinatirProtocol?
 
     private let viewElements: ViewElements = ViewElements.shared
 

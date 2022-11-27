@@ -9,8 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController, ViewAppProtocol {
     
-    weak var presentor: AppPresenterProtocol?
-    weak var coordinator: AppCoordinatorProtocol?
+    var presentor: AppPresenterProtocol?
+    var coordinator: ProfileCoordinator?
     var user: User
     var postData = [String : Any]()
     var array: [Post]?
@@ -36,13 +36,19 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         tableView.backgroundColor = .systemBackground
         tableView.sectionFooterHeight = 0
         tableView.showsVerticalScrollIndicator = false
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(updatePost), for: .valueChanged)
+
         return tableView
     }()
     
     // MARK: - Init
     
-    init(presentor: AppPresenterProtocol?, user: User) {
+    init(presentor: AppPresenterProtocol?,
+         coordinator: ProfileCoordinator?,
+         user: User) {
         self.presentor = presentor
+        self.coordinator = coordinator
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
@@ -77,11 +83,19 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
                 self.activityIndicator.stopAnimating()
             }
         })
+
     }
 
 
 
     private func setupLayout() {
+
+        let barButton = UIBarButtonItem(title: "Выход",
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(exitProfile))
+        barButton.tintColor = UIColor(.mainColor)
+        navigationItem.rightBarButtonItem = barButton
 
         view.addSubviews(profileTableView, activityIndicator)
 
@@ -96,6 +110,21 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         ])
     }
 
+    @objc private func exitProfile() {
+        presentor?.exitProfile()
+    }
+
+    @objc private func updatePost() {
+        presentor?.getPostForUser(user: user, completion: {  posts in
+            self.array = posts
+            DispatchQueue.main.async {
+                self.profileTableView.reloadData()
+                self.profileTableView.refreshControl?.endRefreshing()
+            }
+        })
+
+    }
+
 }
 
 
@@ -105,9 +134,9 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == 2 else { return nil }
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: PostHeaderView.self)) as? PostHeaderView else { return nil}
-        header.assemblyHeader(presentor: presentor,
-                              coordinator: coordinator,
-                              user: user)
+        header.coordinator = coordinator
+        header.presentor = presentor
+        header.user = user
         return header
     }
 

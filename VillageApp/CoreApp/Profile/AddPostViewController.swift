@@ -9,8 +9,8 @@ import UIKit
 
 class AddPostViewController: UIViewController, ViewAppProtocol {
 
-    weak var presentor: AppPresenterProtocol?
-    weak var coordinator: AppCoordinatorProtocol?
+    var presentor: AppPresenterProtocol?
+    var coordinator: ProfileCoordinator?
     var user: User?
     var userPost = [String : Any]()
     
@@ -41,6 +41,17 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
         textView.backgroundColor = .systemBackground
         return textView
     }()
+
+
+    // MARK: - Init
+    init(coordinator: ProfileCoordinator?) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - Functions
 
@@ -97,7 +108,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
 
 
     @objc private func cancelSave() {
-        dismiss(animated: true)
+        coordinator?.dismiss()
     }
 
 }

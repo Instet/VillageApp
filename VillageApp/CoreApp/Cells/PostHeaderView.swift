@@ -10,7 +10,7 @@ import UIKit
 class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
 
     var presentor: AppPresenterProtocol?
-    var coordinator: AppCoordinatorProtocol?
+    var coordinator: ProfileCoordinator?
     var user: User?
 
     private let viewElements: ViewElements = ViewElements.shared
@@ -60,16 +60,15 @@ class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
     @objc func addPost() {
         guard let user = user else { return }
         coordinator?.addPostPresent(presentor: presentor,
-                                    coordinator: coordinator,
                                     user: user)
     }
-
-    func assemblyHeader(presentor: AppPresenterProtocol?,
-                        coordinator: AppCoordinatorProtocol?,
-                        user: User) {
-        self.presentor = presentor
-        self.user = user
-        self.coordinator = coordinator
-    }
+//
+//    func assemblyHeader(presentor: AppPresenterProtocol?,
+//                        //coordinator: ProfileCoordinator?,
+//                        user: User) {
+//        self.presentor = presentor
+//        self.user = user
+//        //self.coordinator = coordinator
+//    }
 
 }

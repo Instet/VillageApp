@@ -8,10 +8,10 @@
 import UIKit
 import CoreData
 
-class FavoritesViewController: UIViewController, ViewAppProtocol {
+class FavoritesViewController: UIViewController {
 
     var presentor: AppPresenterProtocol?
-    var coordinator: AppCoordinatorProtocol?
+    var coordinator: CoordinatorViewController?
     private let coreData: CoreDataManager = CoreDataManager.shared
     private let viewElements: ViewElements = ViewElements.shared
 
@@ -37,6 +37,19 @@ class FavoritesViewController: UIViewController, ViewAppProtocol {
         resultController.delegate = self
         return resultController
     }()
+
+    // MARK: - Init
+
+    init(presentor: AppPresenterProtocol?, coordinator: CoordinatorViewController? ) {
+        self.presentor = presentor
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - Functions
     override func viewWillAppear(_ animated: Bool) {

@@ -9,8 +9,8 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
-    weak var presentor: AppPresenterProtocol?
-    weak var coordinator: AppCoordinatorProtocol?
+    var presentor: AppPresenterProtocol?
+    var coordinator: ProfileCoordinator?
 
     private let coreData: CoreDataManager = CoreDataManager.shared
 
