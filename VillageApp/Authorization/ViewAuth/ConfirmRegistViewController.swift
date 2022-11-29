@@ -16,7 +16,7 @@ final class ConfirmRegistViewController: UIViewController, ViewAuthorisationProt
     private var phoneCode: String = ""
     var phone = ""
 
-    private var confirmLabelText: StringSet = {
+    private var confirmLabelText: StringKey = {
         if UserDefaults.standard.bool(forKey: "hasAccount") ||
             UserDefaults.standard.bool(forKey: "isRegistred") {
             return .logIn
@@ -25,7 +25,7 @@ final class ConfirmRegistViewController: UIViewController, ViewAuthorisationProt
         }
     }()
 
-    private var registationButtonText: StringSet = {
+    private var registationButtonText: StringKey = {
         if UserDefaults.standard.bool(forKey: "hasAccount") ||
             UserDefaults.standard.bool(forKey: "isRegistred") {
             return .logIn

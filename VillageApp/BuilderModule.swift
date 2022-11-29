@@ -30,7 +30,7 @@ final class BuilderModule {
         case .home:
             let homeVC = HomeViewController(presentor: presentor)
             let homeNC = UINavigationController(rootViewController: homeVC )
-            homeNC.tabBarItem = UITabBarItem(title: StringSet.titleHome.localizedString(),
+            homeNC.tabBarItem = UITabBarItem(title: StringKey.titleHome.localizedString(),
                                                  image: UIImage(.houseOrange),
                                                  selectedImage: UIImage(.houseOrange))
             return homeNC
@@ -40,7 +40,7 @@ final class BuilderModule {
                                                   coordinator: coordinator as? ProfileCoordinator,
                                                   user: user)
             let profileNC = UINavigationController(rootViewController: profileVC)
-            profileNC.tabBarItem = UITabBarItem(title: StringSet.titleProfile.localizedString(),
+            profileNC.tabBarItem = UITabBarItem(title: StringKey.titleProfile.localizedString(),
                                                  image: UIImage(.user),
                                                  selectedImage: UIImage(.user))
             return profileNC
@@ -48,7 +48,7 @@ final class BuilderModule {
             let favoritesVC = FavoritesViewController(presentor: presentor,
                                                       coordinator: coordinator as? FavoritesCoordinator)
             let favoritesNC = UINavigationController(rootViewController: favoritesVC)
-            favoritesNC.tabBarItem = UITabBarItem(title: StringSet.titleFavorites.localizedString(),
+            favoritesNC.tabBarItem = UITabBarItem(title: StringKey.titleFavorites.localizedString(),
                                                  image: UIImage(.like),
                                                  selectedImage: UIImage(.like))
             return favoritesNC

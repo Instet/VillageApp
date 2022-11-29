@@ -92,6 +92,10 @@
 	<string>Access denied</string>
 	<key>accessFailedDescript</key>
 	<string>The app needs access to the photo library</string>
+	<key>deletePhoto</key>
+	<string>Delete</string>
+	<key>deletePhotoDescript</key>
+	<string>Are you sure you want to delete the photo</string>
 	<key>StringKey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

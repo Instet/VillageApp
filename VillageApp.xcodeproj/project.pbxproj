@@ -43,9 +43,10 @@
 		DB89598129166B3E00D370B7 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89598029166B3E00D370B7 /* StringExtension.swift */; };
 		DB8959832916DDF700D370B7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8959822916DDF700D370B7 /* Constants.swift */; };
 		DB8959872916EBDF00D370B7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8959862916EBDF00D370B7 /* RegistrationViewController.swift */; };
-		DB8959892916EC8900D370B7 /* StringSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8959882916EC8900D370B7 /* StringSet.swift */; };
+		DB8959892916EC8900D370B7 /* StringKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8959882916EC8900D370B7 /* StringKey.swift */; };
 		DB89598B2917B02200D370B7 /* ConfirmRegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89598A2917B02200D370B7 /* ConfirmRegistViewController.swift */; };
 		DB89598E2917C15E00D370B7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB89598D2917C15D00D370B7 /* LogInViewController.swift */; };
+		DBBA65EC2934A69400A3772B /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBA65EB2934A69400A3772B /* Photo.swift */; };
 		DBC0A4A42928E41200A10DC8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC0A4A32928E41200A10DC8 /* CoreDataManager.swift */; };
 		DBC0A4A72928E46100A10DC8 /* AppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBC0A4A52928E46100A10DC8 /* AppModel.xcdatamodeld */; };
 		DBE9C4F02920FC2A00AB525C /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9C4EF2920FC2A00AB525C /* PhotosTableViewCell.swift */; };
@@ -99,9 +100,10 @@
 		DB89598029166B3E00D370B7 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		DB8959822916DDF700D370B7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB8959862916EBDF00D370B7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		DB8959882916EC8900D370B7 /* StringSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSet.swift; sourceTree = "<group>"; };
+		DB8959882916EC8900D370B7 /* StringKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringKey.swift; sourceTree = "<group>"; };
 		DB89598A2917B02200D370B7 /* ConfirmRegistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistViewController.swift; sourceTree = "<group>"; };
 		DB89598D2917C15D00D370B7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		DBBA65EB2934A69400A3772B /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DBC0A4A32928E41200A10DC8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DBC0A4A62928E46100A10DC8 /* AppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppModel.xcdatamodel; sourceTree = "<group>"; };
 		DBE9C4EF2920FC2A00AB525C /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				DB10C61A291843FE006457C4 /* User.swift */,
 				DBE9C4F1292170EC00AB525C /* Post.swift */,
+				DBBA65EB2934A69400A3772B /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,7 +295,7 @@
 				DB89597A29164BF300D370B7 /* ColorSet.swift */,
 				DB89597C29164C4900D370B7 /* ImageSet.swift */,
 				DB8959822916DDF700D370B7 /* Constants.swift */,
-				DB8959882916EC8900D370B7 /* StringSet.swift */,
+				DB8959882916EC8900D370B7 /* StringKey.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBA65EC2934A69400A3772B /* Photo.swift in Sources */,
 				DB89597D29164C4900D370B7 /* ImageSet.swift in Sources */,
 				DB895963291561FF00D370B7 /* FirstEnterViewController.swift in Sources */,
 				DBE9C4FF29227CAA00AB525C /* AppPresentor.swift in Sources */,
@@ -465,7 +469,7 @@
 				DBEB89692928F9EC00D9EAF5 /* PostModel+CoreDataClass.swift in Sources */,
 				DB8959872916EBDF00D370B7 /* RegistrationViewController.swift in Sources */,
 				DB89598E2917C15E00D370B7 /* LogInViewController.swift in Sources */,
-				DB8959892916EC8900D370B7 /* StringSet.swift in Sources */,
+				DB8959892916EC8900D370B7 /* StringKey.swift in Sources */,
 				DBEB8971292AA0DC00D9EAF5 /* PhotoPreview.swift in Sources */,
 				DB83289F29325C3C00E60C8C /* HomeCoordinator.swift in Sources */,
 				DBE9C4F02920FC2A00AB525C /* PhotosTableViewCell.swift in Sources */,

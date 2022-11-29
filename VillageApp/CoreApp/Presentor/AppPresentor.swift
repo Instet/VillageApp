@@ -22,7 +22,7 @@ protocol AppPresenterProtocol: AnyObject {
 
     var coordinator: ProfileCoordinator? { get set }
     var delegate: AppPresentorDelegate? { get set }
-    var images: [UIImage] { get set }
+    var photos: [Photo] { get set }
 
     func addPost(userPost: [String : Any])
     func getPostForUser(user: User, completion: @escaping ([Post]) -> Void)
@@ -43,7 +43,7 @@ final class AppPresentor: AppPresenterProtocol {
     var delegate: AppPresentorDelegate?
     var coordinator: ProfileCoordinator?
     private let fileManager = FileManagerService()
-    var images: [UIImage] = []
+    var photos: [Photo] = []
 
 
     private var backendService = FirebaseService.shared
@@ -119,25 +119,23 @@ final class AppPresentor: AppPresenterProtocol {
 
 
     func getImage() {
-        images.removeAll()
+        photos.removeAll()
 
         guard let urlImages = fileManager.getFiles() else { return }
         for url in urlImages {
-            var image: UIImage?
-            if #available(iOS 16.0, *) {
-                image = UIImage(contentsOfFile: url.path(percentEncoded: true))
-            } else {
-                image = UIImage(contentsOfFile: url.path)
-            }
-            images.append(image ?? UIImage())
+            var photo: Photo?
+            photo = Photo(image: UIImage(contentsOfFile: url.path) ?? UIImage(),
+                          path: url.path)
+            photos.append(photo!)
+
         }
 
     }
 
 
     private func alertForRequstAuthPH() {
-        failureAlert(title: StringSet.accessFailed.localizedString(),
-                     message: StringSet.accessFailedDescript.localizedString(),
+        failureAlert(title: StringKey.accessFailed.localizedString(),
+                     message: StringKey.accessFailedDescript.localizedString(),
                      preferredStyle: .alert,
                      actions: [("Ok", UIAlertAction.Style.default, nil)])
     }

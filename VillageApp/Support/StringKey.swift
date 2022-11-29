@@ -1,5 +1,5 @@
 //
-//  StringSet.swift
+//  StringKey.swift
 //  VillageApp
 //
 //  Created by Руслан Магомедов on 05.11.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StringSet: String {
+enum StringKey: String {
     
     case registrationString
     case hasAccountString
@@ -54,6 +54,8 @@ enum StringSet: String {
     case formatWrong
     case accessFailed
     case accessFailedDescript
+    case deletePhoto
+    case deletePhotoDescript
 
 
     func localizedString() -> String {

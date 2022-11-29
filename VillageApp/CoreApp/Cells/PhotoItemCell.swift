@@ -39,8 +39,9 @@ class PhotoItemCell: UICollectionViewCell {
         ])
     }
 
-    func configCell(image: UIImage) {
-        imageCell.image = image
+    func configCell(photo: Photo?) {
+        guard let photo = photo else { return }
+        imageCell.image = photo.image
     }
 
 

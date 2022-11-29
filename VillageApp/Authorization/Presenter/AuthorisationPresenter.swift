@@ -43,7 +43,7 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
     func registrationUser(phone: String) {
 
         if phone.count < 16 {
-            failureAlert(title: StringSet.failedNumber.localizedString(),
+            failureAlert(title: StringKey.failedNumber.localizedString(),
                          message: nil,
                          preferredStyle: .alert,
                          actions: [("Ok", UIAlertAction.Style.cancel, nil)])
@@ -59,8 +59,8 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
 
     func checkVerificationID(verificationCode: String) {
         if verificationCode.count < 6 {
-            failureAlert(title: StringSet.failedCode.localizedString(),
-                         message: StringSet.failedCodeDescript.localizedString(),
+            failureAlert(title: StringKey.failedCode.localizedString(),
+                         message: StringKey.failedCodeDescript.localizedString(),
                          preferredStyle: .alert,
                          actions: [("Ok", UIAlertAction.Style.cancel, nil)])
             return
@@ -100,8 +100,8 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
             isEmptyData = true
         }
         if isEmptyData {
-            failureAlert(title: StringSet.error.localizedString(),
-                         message: StringSet.errorDescript.localizedString(),
+            failureAlert(title: StringKey.error.localizedString(),
+                         message: StringKey.errorDescript.localizedString(),
                          preferredStyle: .alert,
                          actions: [("Ок", UIAlertAction.Style.default, nil)])
             return

@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
     }
 
     private func setupLayout() {
-        self.title = StringSet.titleHome.localizedString()
+        self.title = StringKey.titleHome.localizedString()
         view.backgroundColor = .systemBackground
 
         view.addSubviews(homeTableView, activityIndicator)

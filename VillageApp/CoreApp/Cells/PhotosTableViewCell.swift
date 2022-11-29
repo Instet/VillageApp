@@ -100,17 +100,20 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
         
     }
 
-    func configViewCell(images: [UIImage]?) {
-        if images?.count == 0 {
+    func configViewCell(photos: [Photo]?) {
+        imageViewArray.forEach { image in
+            image.image = nil
+        }
+        if photos?.count == 0 {
             stackView.isHidden = true
+            countStatePhotosLabel.isHidden = false
         } else {
-            for i in 0 ..< images!.count {
+            for i in 0 ..< photos!.count {
+                guard let photo = photos?[i].image else { return }
                 if i == 4 {
-                    countStatePhotosLabel.isHidden = true
-                    stackView.isHidden = false
                     return
                 }
-                imageViewArray[i].image = images![i]
+                imageViewArray[i].image =  photo
             }
             countStatePhotosLabel.isHidden = true
             stackView.isHidden = false

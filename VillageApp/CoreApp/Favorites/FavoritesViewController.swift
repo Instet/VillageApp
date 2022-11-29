@@ -70,7 +70,7 @@ class FavoritesViewController: UIViewController {
     }
 
     private func setupLayout() {
-        self.title = StringSet.titleFavorites.localizedString()
+        self.title = StringKey.titleFavorites.localizedString()
         view.backgroundColor = .systemBackground
 
         view.addSubviews(favoritesTableView)

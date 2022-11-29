@@ -10,8 +10,9 @@ import UIKit
 
 final class PhotoPreview: UIViewController {
 
-    var images: [UIImage] = []
+    var photos: [Photo?] = []
     var index: Int = 0
+    private let manager = FileManagerService()
 
     lazy var photo: UIImageView = {
         let image = UIImageView()
@@ -39,6 +40,12 @@ final class PhotoPreview: UIViewController {
         super.viewDidLoad()
         setupLayout()
         showPhoto()
+        let trashButton = UIBarButtonItem(image: UIImage(systemName: "trash"),
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(deleteImage))
+        trashButton.tintColor = UIColor(.mainColor)
+        navigationItem.rightBarButtonItem = trashButton
 
     }
 
@@ -63,27 +70,51 @@ final class PhotoPreview: UIViewController {
     }
 
     func showPhoto() {
-        photo.image = images[index]
+        photo.image = photos[index]?.image
         }
 
     @objc private func onLeftPhoto() {
         if index > 0 {
             index -= 1
-            photo.image = images[index]
+            photo.image = photos[index]?.image
         } else {
-            index = images.count - 1
-            photo.image = images[index]
+            index = photos.count - 1
+            photo.image = photos[index]?.image
         }
     }
 
     @objc private func onRightPhoto() {
-        if index != images.count - 1 {
+        if index != photos.count - 1 {
             index += 1
-            photo.image = images[index]
+            photo.image = photos[index]?.image
         } else {
             index = 0
-            photo.image = images[index]
+            photo.image = photos[index]?.image
         }
+
+    }
+
+    @objc private func deleteImage() {
+        let alert = UIAlertController(title: StringKey.deletePhoto.localizedString(),
+                                      message: StringKey.deletePhotoDescript.localizedString(),
+                                      preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: StringKey.cancelSave.localizedString(),
+                                         style: .cancel)
+        let deleteAction = UIAlertAction(title: StringKey.deletePhoto.localizedString(),
+                                         style: .destructive) { [weak self] alert in
+            guard let self = self else { return }
+            guard let path = self.photos[self.index]?.path else { return }
+            self.manager.remove(path) {
+                self.photos.remove(at: self.index)
+                self.navigationController?.popViewController(animated: false)
+                // доработать
+
+            }
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true)
 
     }
 

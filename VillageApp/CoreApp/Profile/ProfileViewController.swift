@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
 
     private func setupLayout() {
 
-        let barButton = UIBarButtonItem(title: StringSet.exitString.localizedString(),
+        let barButton = UIBarButtonItem(title: StringKey.exitString.localizedString(),
                                         style: .plain,
                                         target: self,
                                         action: #selector(exitProfile))
@@ -181,8 +181,7 @@ extension ProfileViewController: UITableViewDataSource {
             guard let photoCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self)) as? PhotosTableViewCell else { return UITableViewCell() }
             photoCell.coordinator = coordinator
             photoCell.presentor = presentor
-            photoCell.configViewCell(images: presentor?.images)
-
+            photoCell.configViewCell(photos: presentor?.photos)
             return photoCell
         } else if indexPath.section == 2 {
 

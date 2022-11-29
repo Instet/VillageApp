@@ -13,7 +13,7 @@ final class ViewElements {
 
     private init() {}
 
-    func getButton(name: StringSet) -> UIButton {
+    func getButton(name: StringKey) -> UIButton {
         let button = UIButton()
         button.setTitle(name.localizedString(), for: .normal)
         button.setTitleColor(.systemBackground, for: .normal)
@@ -26,7 +26,7 @@ final class ViewElements {
         return button
     }
     /// more fine-tuning of the button
-    func getButton(name: StringSet,
+    func getButton(name: StringKey,
                    textColor: UIColor,
                    backroundColor: UIColor = .white,
                    cornerRadius: CGFloat = 0,
@@ -46,7 +46,7 @@ final class ViewElements {
         return button
     }
 
-    func getLabel(text: StringSet,
+    func getLabel(text: StringKey,
                   size: CGFloat,
                   textColor: UIColor = .black,
                   weight: UIFont.Weight = .regular,

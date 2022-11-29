@@ -36,6 +36,8 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
     // MARK: - Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        presentor?.getImage()
+        photosCollection.reloadData()
     }
 
 
@@ -47,7 +49,7 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
     }
 
     private func setupLayout() {
-        self.title = StringSet.myPhotos.rawValue
+        self.title = StringKey.myPhotos.localizedString()
         view.backgroundColor = .systemBackground
 
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus")?.withTintColor(UIColor(.mainColor)!, renderingMode: .alwaysOriginal),
@@ -89,18 +91,19 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presentor?.images.count ?? 0
+        return presentor?.photos.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotoItemCell.self), for: indexPath) as? PhotoItemCell else { return UICollectionViewCell() }
-        photoCell.configCell(image: presentor?.images[indexPath.item] ?? UIImage())
+        photoCell.configCell(photo: presentor?.photos[indexPath.row])
         return photoCell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.presentationSectionIndex(forDataSourceSectionIndex: indexPath.row)
-            coordinator?.showPhoto(images: presentor?.images, index: indexPath.row)
+        guard let photos = presentor?.photos else { return }
+            coordinator?.showPhoto(photos: photos, index: indexPath.row)
     }
 
 }
@@ -126,8 +129,8 @@ extension PhotosViewController: PHPickerViewControllerDelegate {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        let alert = UIAlertController(title: StringSet.error.localizedString(),
-                                                      message: StringSet.formatWrong.localizedString(),
+                        let alert = UIAlertController(title: StringKey.error.localizedString(),
+                                                      message: StringKey.formatWrong.localizedString(),
                                                       preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .default))
                         self.present(alert, animated: true)

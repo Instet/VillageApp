@@ -46,11 +46,10 @@ final class ProfileCoordinator: CoordinatorViewController  {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    func showPhoto(images: [UIImage]?, index: Int) {
-        guard let images = images else { return }
+    func showPhoto(photos: [Photo], index: Int) {
         let vc = PhotoPreview()
         vc.index = index
-        vc.images = images
+        vc.photos = photos
         vc.addBackButton()
         navigationController?.pushViewController(vc, animated: true)
     }

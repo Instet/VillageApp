@@ -17,7 +17,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
 
     private lazy var savePostBotton: UIButton = {
         let button = UIButton()
-        button.setTitle(StringSet.savePost.localizedString(), for: .normal)
+        button.setTitle(StringKey.savePost.localizedString(), for: .normal)
         button.setTitleColor(UIColor(.mainColor), for: .normal)
         button.setTitleColor(.systemGray2, for: .disabled)
         button.addTarget(self, action: #selector(saveUserPost), for: .touchUpInside)
@@ -26,7 +26,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
 
     private lazy var cancelBotton: UIButton = {
         let button = UIButton()
-        button.setTitle(StringSet.cancelSave.localizedString(), for: .normal)
+        button.setTitle(StringKey.cancelSave.localizedString(), for: .normal)
         button.setTitleColor(UIColor(.mainColor), for: .normal)
         button.addTarget(self, action: #selector(cancelSave), for: .touchUpInside)
         return button

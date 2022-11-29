@@ -92,6 +92,10 @@
 	<string>В доступе отказано</string>
 	<key>accessFailedDescript</key>
 	<string>Приложению нужен доступ к библиотеке фотографии</string>
+	<key>deletePhoto</key>
+	<string>Удалить</string>
+	<key>deletePhotoDescript</key>
+	<string>Вы действительно хотите удалить фотографию?</string>
 	<key>StringKey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
