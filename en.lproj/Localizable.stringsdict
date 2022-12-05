@@ -96,6 +96,8 @@
 	<string>Delete</string>
 	<key>deletePhotoDescript</key>
 	<string>Are you sure you want to delete the photo</string>
+	<key>datePost</key>
+	<string>en_EN</string>
 	<key>StringKey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

@@ -147,10 +147,11 @@ extension PhotosViewController: PHPickerViewControllerDelegate {
         configuration.filter = filter
         configuration.selectionLimit = 1
 
-        let imagePicker = PHPickerViewController(configuration: configuration)
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
-
+        DispatchQueue.main.async {
+            let imagePicker = PHPickerViewController(configuration: configuration)
+            imagePicker.delegate = self
+            self.present(imagePicker, animated: true)
+        }
     }
 
 }

@@ -144,6 +144,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     func configCell(userPost: Post) {
         postAuthor.text = userPost.author
         postText.text = userPost.post
+        print(self.dataInDate(data: userPost.dateCreated))
     }
 
     

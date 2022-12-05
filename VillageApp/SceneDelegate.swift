@@ -17,8 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         coordinator = MainCoordinator()
-        window?.makeKeyAndVisible()
+
+        #if DEBUG
+        let userData = [String : Any]()
+        let user = User(data: userData)
+        window?.rootViewController = coordinator?.startApp(user: user, stateApp: .coreApp)
+        #else
         window?.rootViewController = coordinator?.startApp(user: nil, stateApp: .coreAuth)
+        #endif
+
+        window?.makeKeyAndVisible()
 
     }
 

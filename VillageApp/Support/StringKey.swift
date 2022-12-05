@@ -56,6 +56,7 @@ enum StringKey: String {
     case accessFailedDescript
     case deletePhoto
     case deletePhotoDescript
+    case datePost
 
 
     func localizedString() -> String {

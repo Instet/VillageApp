@@ -103,6 +103,10 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
         userPost.updateValue(post, forKey: "post")
         userPost.updateValue(author, forKey: "author")
         userPost.updateValue(userPhone, forKey: "userPhone")
+
+        let currentDateAddPost = Int(Date().timeIntervalSinceReferenceDate)
+        userPost.updateValue(currentDateAddPost, forKey: "dateCreated")
+
         presentor?.addPost(userPost: userPost)
     }
 

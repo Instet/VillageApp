@@ -48,7 +48,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presentor?.getAllPost(completion: { posts in
-            self.arrayAllPosts = posts
+            self.arrayAllPosts = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
                 self.activityIndicator.stopAnimating()

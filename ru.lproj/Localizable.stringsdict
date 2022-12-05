@@ -96,6 +96,8 @@
 	<string>Удалить</string>
 	<key>deletePhotoDescript</key>
 	<string>Вы действительно хотите удалить фотографию?</string>
+	<key>datePost</key>
+	<string>ru_RU</string>
 	<key>StringKey</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

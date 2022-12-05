@@ -204,7 +204,7 @@ extension ProfileViewController: AppPresentorDelegate {
     func didUpdatePost() {
         activityIndicator.startAnimating()
         presentor?.getPostForUser(user: user, completion: {  posts in
-            self.array = posts
+            self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
                 self.profileTableView.reloadData()
                 self.activityIndicator.stopAnimating()

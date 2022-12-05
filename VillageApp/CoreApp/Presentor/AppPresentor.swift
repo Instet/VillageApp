@@ -35,8 +35,6 @@ protocol AppPresenterProtocol: AnyObject {
 }
 
 // Добавить метод удаления
-// cортировка постов по дате
-// добавить возможность сохранения фото
 
 final class AppPresentor: AppPresenterProtocol {
 
