@@ -27,14 +27,13 @@ protocol AppPresenterProtocol: AnyObject {
     func addPost(userPost: [String : Any])
     func getPostForUser(user: User, completion: @escaping ([Post]) -> Void)
     func getAllPost(completion: @escaping ([Post]) -> Void)
+    func deleteUserPost(postId: String, completion: @escaping () -> Void)
     func getImage()
     func exitProfile()
 
     /// checking access to the photo library
     func requestAuthorisation(completion: @escaping () -> Void)
 }
-
-// Добавить метод удаления
 
 final class AppPresentor: AppPresenterProtocol {
 
@@ -89,6 +88,26 @@ final class AppPresentor: AppPresenterProtocol {
         }
         backendService.getAllPosts(handler: handler, failure: failure)
     }
+
+
+    func deleteUserPost(postId: String, completion: @escaping () -> Void) {
+        let alert = UIAlertController(title: StringKey.deletePhoto.localizedString(),
+                                      message: nil,
+                                      preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: StringKey.cancelSave.localizedString(),
+                                         style: .cancel)
+        let deleteAction = UIAlertAction(title: StringKey.deletePhoto.localizedString(),
+                                         style: .destructive) { [weak self] action in
+            guard let self = self else { return }
+            self.backendService.deletePostUser(postId)
+            completion()
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        coordinator?.navigationController?.present(alert, animated: true)
+    }
+
 
 
 
@@ -149,7 +168,6 @@ final class AppPresentor: AppPresenterProtocol {
 
 
 }
-
 
 
 

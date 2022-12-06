@@ -90,7 +90,8 @@ final class FirebaseService {
         query.getDocuments { querySnapshot, error in
             guard error == nil else { failure(error!.localizedDescription); return }
             let posts = querySnapshot?.documents.map({ (document) -> [String : Any] in
-                let post = document.data()
+                var post = document.data()
+                post.updateValue(document.documentID, forKey: "postId")
                 return post
             })
             let arrayPost = posts?.map({ dictPost in
@@ -118,6 +119,14 @@ final class FirebaseService {
             })
             handler(arrayPost!)
 
+        }
+    }
+
+    /// delete
+    func deletePostUser(_ id: String) {
+        dataBase.collection("Post").document(id).delete { error in
+            guard  error == nil else { print(error.debugDescription); return }
+            print("Post deleted ")
         }
     }
 

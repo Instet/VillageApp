@@ -13,6 +13,7 @@ class Post {
     var userPhone: String
     var isFavorite: Bool
     var dateCreated: Int
+    var postId: String
 
     init(postData: [String : Any]) {
         self.post = postData["post"] as? String ?? ""
@@ -20,5 +21,6 @@ class Post {
         self.userPhone = postData["userPhone"] as? String ?? ""
         self.isFavorite = postData["isFavorite"] as? Bool ?? false
         self.dateCreated = postData["dateCreated"] as? Int ?? 0
+        self.postId = postData["postId"] as? String ?? ""
     }
 }

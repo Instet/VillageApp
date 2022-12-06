@@ -20,7 +20,7 @@ extension UIView {
         let date = Date(timeIntervalSinceReferenceDate: TimeInterval(data))
         let dateFormated = DateFormatter()
         dateFormated.timeZone = TimeZone(identifier: "UTC")
-        dateFormated.dateFormat = "dd MMMM yyyy"
+        dateFormated.dateFormat = "d MMMM yyyy"
         dateFormated.locale = Locale(identifier: StringKey.datePost.localizedString())
         return dateFormated.string(from: date)
     }

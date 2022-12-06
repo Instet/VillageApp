@@ -17,9 +17,19 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
     var arrayPosts = [Post]()
     var cellIndex: Int = 0
+    var callback: (() -> ())?
 
 
     private let viewElements: ViewElements = ViewElements.shared
+
+    lazy var deletePostButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = UIColor(.mainColor)
+        button.isHidden = true
+        button.addTarget(self, action: #selector(deleteUserPost), for: .touchUpInside)
+        return button
+    }()
 
 
     private lazy var postText: UITextView = {
@@ -41,6 +51,12 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     private lazy var postAuthor: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
+        return label
+    }()
+
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .light)
         return label
     }()
 
@@ -88,7 +104,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
     private func setupLayout() {
 
-        contentView.addSubviews(avatar, postAuthor, coreView)
+        contentView.addSubviews(avatar, postAuthor, coreView, deletePostButton)
 
         NSLayoutConstraint.activate([
             avatar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.normalLeadingIndent),
@@ -99,6 +115,9 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
             postAuthor.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: Constants.smallLeadingIndent),
             postAuthor.centerYAnchor.constraint(equalTo: avatar.centerYAnchor),
 
+            deletePostButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingIndent),
+            deletePostButton.centerYAnchor.constraint(equalTo: postAuthor.centerYAnchor),
+
             coreView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             coreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             coreView.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: Constants.topIndentTwo),
@@ -108,7 +127,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
         ])
 
-        coreView.addSubviews(verticalLine, horizontalLine, postText, addInNoteButton)
+        coreView.addSubviews(verticalLine, horizontalLine, postText, addInNoteButton, dateLabel)
 
         NSLayoutConstraint.activate([
 
@@ -129,7 +148,11 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
             addInNoteButton.topAnchor.constraint(equalTo: horizontalLine.bottomAnchor, constant: Constants.genderTop),
             addInNoteButton.trailingAnchor.constraint(equalTo: coreView.trailingAnchor, constant: Constants.trailingIndent),
-            addInNoteButton.heightAnchor.constraint(equalToConstant: Constants.heightButtonSize)
+            addInNoteButton.heightAnchor.constraint(equalToConstant: Constants.heightButtonSize),
+
+            dateLabel.leadingAnchor.constraint(equalTo: coreView.leadingAnchor, constant: Constants.leadingIndent),
+            dateLabel.centerYAnchor.constraint(equalTo: addInNoteButton.centerYAnchor)
+
         ])
     }
 
@@ -139,12 +162,18 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
     }
 
+    @objc private func deleteUserPost() {
+        presentor?.deleteUserPost(postId: arrayPosts[cellIndex].postId, completion: {
+            self.callback!()
+        })
+    }
+
 
     /// get post 
     func configCell(userPost: Post) {
         postAuthor.text = userPost.author
         postText.text = userPost.post
-        print(self.dataInDate(data: userPost.dateCreated))
+        dateLabel.text = dataInDate(data: userPost.dateCreated)
     }
 
     

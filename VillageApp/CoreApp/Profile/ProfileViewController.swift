@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.color = UIColor(.mainColor)
-        indicator.style = .medium
+        indicator.style = .large
         indicator.startAnimating()
         return indicator
     }()
@@ -75,9 +75,9 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         presentor?.delegate = self
         setupLayout()
         
-        presentor?.getPostForUser(user: user, completion: {  posts in
-            self.array = posts
-            
+        presentor?.getPostForUser(user: user, completion: { [weak self] posts in
+            guard let self = self else { return }
+            self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
                 self.profileTableView.reloadData()
                 self.activityIndicator.stopAnimating()
@@ -115,8 +115,9 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
     }
 
     @objc private func updatePost() {
-        presentor?.getPostForUser(user: user, completion: {  posts in
-            self.array = posts
+        presentor?.getPostForUser(user: user, completion: { [weak self] posts in
+            guard let self = self else { return }
+            self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
                 self.profileTableView.reloadData()
                 self.profileTableView.refreshControl?.endRefreshing()
@@ -187,8 +188,15 @@ extension ProfileViewController: UITableViewDataSource {
 
             guard let postCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
             postCell.arrayPosts = array ?? []
+            postCell.coordinator = coordinator
+            postCell.presentor = presentor
             postCell.cellIndex = indexPath.row
+            postCell.deletePostButton.isHidden = false
             postCell.configCell(userPost: array![indexPath.row])
+            postCell.callback = { [weak self] in
+                guard let self = self else { return }
+                self.didUpdatePost()
+            }
             return postCell
         }
         return UITableViewCell()
@@ -203,7 +211,8 @@ extension ProfileViewController: AppPresentorDelegate {
 
     func didUpdatePost() {
         activityIndicator.startAnimating()
-        presentor?.getPostForUser(user: user, completion: {  posts in
+        presentor?.getPostForUser(user: user, completion: {  [weak self] posts in
+            guard let self = self else { return }
             self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
                 self.profileTableView.reloadData()
