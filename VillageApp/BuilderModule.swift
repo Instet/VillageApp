@@ -23,12 +23,12 @@ final class BuilderModule {
     }
 
     func builerModule(coordinator: CoordinatorViewController?,
-                      presentor: AppPresenterProtocol?,
+                      presenter: AppPresenterProtocol?,
                       user: User?) -> UINavigationController? {
 
         switch state {
         case .home:
-            let homeVC = HomeViewController(presentor: presentor)
+            let homeVC = HomeViewController(presenter: presenter)
             let homeNC = UINavigationController(rootViewController: homeVC )
             homeNC.tabBarItem = UITabBarItem(title: StringKey.titleHome.localizedString(),
                                                  image: UIImage(.houseOrange),
@@ -36,7 +36,7 @@ final class BuilderModule {
             return homeNC
         case .profile:
             guard let user = user else { return nil}
-            let profileVC = ProfileViewController(presentor: presentor,
+            let profileVC = ProfileViewController(presenter: presenter,
                                                   coordinator: coordinator as? ProfileCoordinator,
                                                   user: user)
             let profileNC = UINavigationController(rootViewController: profileVC)
@@ -45,7 +45,7 @@ final class BuilderModule {
                                                  selectedImage: UIImage(.user))
             return profileNC
         case .favorites:
-            let favoritesVC = FavoritesViewController(presentor: presentor,
+            let favoritesVC = FavoritesViewController(presenter: presenter,
                                                       coordinator: coordinator as? FavoritesCoordinator)
             let favoritesNC = UINavigationController(rootViewController: favoritesVC)
             favoritesNC.tabBarItem = UITabBarItem(title: StringKey.titleFavorites.localizedString(),

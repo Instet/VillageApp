@@ -9,7 +9,7 @@ import UIKit
 
 class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: ProfileCoordinator?
     var user: User?
 
@@ -59,7 +59,7 @@ class PostHeaderView: UITableViewHeaderFooterView, ViewAppProtocol {
 
     @objc func addPost() {
         guard let user = user else { return }
-        coordinator?.addPostPresent(presentor: presentor,
+        coordinator?.addPostPresent(presenter: presenter,
                                     user: user)
     }
 

@@ -12,7 +12,7 @@ import PhotosUI
 
 class PhotosViewController: UIViewController, ViewAppProtocol {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: ProfileCoordinator?
     private let fileManager = FileManagerService()
 
@@ -36,7 +36,7 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
     // MARK: - Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presentor?.getImage()
+        presenter?.getImage()
         photosCollection.reloadData()
     }
 
@@ -72,7 +72,7 @@ class PhotosViewController: UIViewController, ViewAppProtocol {
 
     
     @objc private func addPhoto() {
-        presentor?.requestAuthorisation(completion: { [weak self ] in
+        presenter?.requestAuthorisation(completion: { [weak self ] in
                 self?.showImagePicker()
         })
     }
@@ -91,18 +91,18 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presentor?.photos.count ?? 0
+        return presenter?.photos.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotoItemCell.self), for: indexPath) as? PhotoItemCell else { return UICollectionViewCell() }
-        photoCell.configCell(photo: presentor?.photos[indexPath.row])
+        photoCell.configCell(photo: presenter?.photos[indexPath.row])
         return photoCell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.presentationSectionIndex(forDataSourceSectionIndex: indexPath.row)
-        guard let photos = presentor?.photos else { return }
+        guard let photos = presenter?.photos else { return }
             coordinator?.showPhoto(photos: photos, index: indexPath.row)
     }
 
@@ -118,11 +118,13 @@ extension PhotosViewController: PHPickerViewControllerDelegate {
         picker.dismiss(animated: true)
 
         for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+            result.itemProvider.loadObject(ofClass: UIImage.self ) { image, error in
+
+                print(image.debugDescription)
                 if let image = image as? UIImage {
                     self.fileManager.createFile(image) { [weak self] in
                         guard let self = self else { return }
-                        self.presentor?.getImage()
+                        self.presenter?.getImage()
                     }
                     DispatchQueue.main.async {
                         self.photosCollection.reloadData()

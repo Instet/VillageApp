@@ -22,27 +22,27 @@ final class ProfileCoordinator: CoordinatorViewController  {
     
     func start() -> UINavigationController? {
         let builder = BuilderModule(state: .profile)
-        let presentor = AppPresentor()
-        presentor.coordinator = self
+        let presenter = AppPresenter()
+        presenter.coordinator = self
         navigationController = builder.builerModule(coordinator: self,
-                                                    presentor: presentor,
+                                                    presenter: presenter,
                                                     user: user)
         return navigationController
     }
 
-    func addPostPresent(presentor: AppPresenterProtocol?, user: User) {
+    func addPostPresent(presenter: AppPresenterProtocol?, user: User) {
         let vc = AddPostViewController(coordinator: self)
-        vc.presentor = presentor
+        vc.presenter = presenter
         vc.user = user
         vc.modalPresentationStyle = .automatic
         navigationController?.present(vc, animated: true)
     }
 
-    func pushPhotoView(presentor: AppPresenterProtocol) {
+    func pushPhotoView(presenter: AppPresenterProtocol) {
         let vc = PhotosViewController()
         vc.addBackButton()
         vc.coordinator = self
-        vc.presentor = presentor
+        vc.presenter = presenter
         navigationController?.pushViewController(vc, animated: true)
     }
 

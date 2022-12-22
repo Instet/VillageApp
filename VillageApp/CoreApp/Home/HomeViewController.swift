@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var arrayAllPosts: [Post]?
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -32,8 +32,8 @@ class HomeViewController: UIViewController {
     }()
 
     // MARK: - Init
-    init(presentor: AppPresenterProtocol?) {
-        self.presentor = presentor
+    init(presenter: AppPresenterProtocol?) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presentor?.getAllPost(completion: { posts in
+        presenter?.getAllPost(completion: { posts in
             self.arrayAllPosts = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
@@ -62,10 +62,9 @@ class HomeViewController: UIViewController {
         setupLayout()
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationItem.largeTitleDisplayMode = .always
-        }
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+
     }
 
     private func setupLayout() {

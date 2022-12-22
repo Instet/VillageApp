@@ -14,9 +14,9 @@ final class HomeCoordinator: CoordinatorViewController  {
 
     func start() -> UINavigationController? {
         let builder = BuilderModule(state: .home)
-        let presentor = AppPresentor()
+        let presenter = AppPresenter()
         navigationController = builder.builerModule(coordinator: self,
-                                                    presentor: presentor,
+                                                    presenter: presenter,
                                                     user: nil)
         return navigationController
     }

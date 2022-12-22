@@ -67,8 +67,7 @@ final class MainTabBarController: UITabBarController {
             ]
             self.tabBar.tintColor = UIColor(.orange)
         case .coreAuth:
-            let navigationController = UINavigationController()
-            let authCoordinator = AuthorizationCoordinator(navigationController: navigationController) { user in
+            let authCoordinator = AuthorizationCoordinator(navigationController: self.navigationController) { user in
                 if user == nil {
                     self.stateApp = .coreAuth
                 } else {

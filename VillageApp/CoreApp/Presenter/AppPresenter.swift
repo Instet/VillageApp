@@ -1,5 +1,5 @@
 //
-//  AppPresentor.swift
+//  AppPresenter.swift
 //  VillageApp
 //
 //  Created by Руслан Магомедов on 14.11.2022.
@@ -12,7 +12,7 @@ import PhotosUI
 import Firebase
 import FirebaseAuth
 
-protocol AppPresentorDelegate: AnyObject {
+protocol AppPresenterDelegate: AnyObject {
 
     func didUpdatePost()
 }
@@ -21,7 +21,7 @@ protocol AppPresentorDelegate: AnyObject {
 protocol AppPresenterProtocol: AnyObject {
 
     var coordinator: ProfileCoordinator? { get set }
-    var delegate: AppPresentorDelegate? { get set }
+    var delegate: AppPresenterDelegate? { get set }
     var photos: [Photo] { get set }
 
     func addPost(userPost: [String : Any])
@@ -35,9 +35,9 @@ protocol AppPresenterProtocol: AnyObject {
     func requestAuthorisation(completion: @escaping () -> Void)
 }
 
-final class AppPresentor: AppPresenterProtocol {
+final class AppPresenter: AppPresenterProtocol {
 
-    var delegate: AppPresentorDelegate?
+    var delegate: AppPresenterDelegate?
     var coordinator: ProfileCoordinator?
     private let fileManager = FileManagerService()
     var photos: [Photo] = []
@@ -172,7 +172,7 @@ final class AppPresentor: AppPresenterProtocol {
 
 
 
-extension AppPresentor {
+extension AppPresenter {
 
     func failureAlert(title: String,
                       message: String?,

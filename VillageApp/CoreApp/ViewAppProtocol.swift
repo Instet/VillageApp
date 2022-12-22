@@ -8,6 +8,6 @@
 import Foundation
 
 protocol ViewAppProtocol {
-    var presentor: AppPresenterProtocol? { get set }
+    var presenter: AppPresenterProtocol? { get set }
     var coordinator: ProfileCoordinator? { get set }
 }

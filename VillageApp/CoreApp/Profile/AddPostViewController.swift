@@ -9,7 +9,7 @@ import UIKit
 
 class AddPostViewController: UIViewController, ViewAppProtocol {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: ProfileCoordinator?
     var user: User?
     var userPost = [String : Any]()
@@ -107,7 +107,7 @@ class AddPostViewController: UIViewController, ViewAppProtocol {
         let currentDateAddPost = Int(Date().timeIntervalSinceReferenceDate)
         userPost.updateValue(currentDateAddPost, forKey: "dateCreated")
 
-        presentor?.addPost(userPost: userPost)
+        presenter?.addPost(userPost: userPost)
     }
 
 

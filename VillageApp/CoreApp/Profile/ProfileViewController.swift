@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, ViewAppProtocol {
     
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: ProfileCoordinator?
     var user: User
     var postData = [String : Any]()
@@ -44,10 +44,10 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
     
     // MARK: - Init
     
-    init(presentor: AppPresenterProtocol?,
+    init(presenter: AppPresenterProtocol?,
          coordinator: ProfileCoordinator?,
          user: User) {
-        self.presentor = presentor
+        self.presenter = presenter
         self.coordinator = coordinator
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presentor?.getImage()
+        presenter?.getImage()
         profileTableView.reloadData()
         
     }
@@ -72,10 +72,10 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
         view.backgroundColor = .systemBackground
         profileTableView.delegate = self
         profileTableView.dataSource = self
-        presentor?.delegate = self
+        presenter?.delegate = self
         setupLayout()
         
-        presentor?.getPostForUser(user: user, completion: { [weak self] posts in
+        presenter?.getPostForUser(user: user, completion: { [weak self] posts in
             guard let self = self else { return }
             self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
@@ -111,11 +111,11 @@ class ProfileViewController: UIViewController, ViewAppProtocol {
     }
 
     @objc private func exitProfile() {
-        presentor?.exitProfile()
+        presenter?.exitProfile()
     }
 
     @objc private func updatePost() {
-        presentor?.getPostForUser(user: user, completion: { [weak self] posts in
+        presenter?.getPostForUser(user: user, completion: { [weak self] posts in
             guard let self = self else { return }
             self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {
@@ -136,7 +136,7 @@ extension ProfileViewController: UITableViewDelegate {
         guard section == 2 else { return nil }
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: PostHeaderView.self)) as? PostHeaderView else { return nil}
         header.coordinator = coordinator
-        header.presentor = presentor
+        header.presenter = presenter
         header.user = user
         return header
     }
@@ -181,15 +181,15 @@ extension ProfileViewController: UITableViewDataSource {
 
             guard let photoCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self)) as? PhotosTableViewCell else { return UITableViewCell() }
             photoCell.coordinator = coordinator
-            photoCell.presentor = presentor
-            photoCell.configViewCell(photos: presentor?.photos)
+            photoCell.presenter = presenter
+            photoCell.configViewCell(photos: presenter?.photos)
             return photoCell
         } else if indexPath.section == 2 {
 
             guard let postCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
             postCell.arrayPosts = array ?? []
             postCell.coordinator = coordinator
-            postCell.presentor = presentor
+            postCell.presenter = presenter
             postCell.cellIndex = indexPath.row
             postCell.deletePostButton.isHidden = false
             postCell.configCell(userPost: array![indexPath.row])
@@ -205,13 +205,13 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 
-// MARK: - AppPresentorDelegate
+// MARK: - AppPresenterDelegate
 
-extension ProfileViewController: AppPresentorDelegate {
+extension ProfileViewController: AppPresenterDelegate {
 
     func didUpdatePost() {
         activityIndicator.startAnimating()
-        presentor?.getPostForUser(user: user, completion: {  [weak self] posts in
+        presenter?.getPostForUser(user: user, completion: {  [weak self] posts in
             guard let self = self else { return }
             self.array = posts.sorted(by: {$0.dateCreated > $1.dateCreated })
             DispatchQueue.main.async {

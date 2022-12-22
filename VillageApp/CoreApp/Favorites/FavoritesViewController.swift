@@ -10,7 +10,7 @@ import CoreData
 
 class FavoritesViewController: UIViewController {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: CoordinatorViewController?
     private let coreData: CoreDataManager = CoreDataManager.shared
     private let viewElements: ViewElements = ViewElements.shared
@@ -40,8 +40,8 @@ class FavoritesViewController: UIViewController {
 
     // MARK: - Init
 
-    init(presentor: AppPresenterProtocol?, coordinator: CoordinatorViewController? ) {
-        self.presentor = presentor
+    init(presenter: AppPresenterProtocol?, coordinator: CoordinatorViewController? ) {
+        self.presenter = presenter
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
 
@@ -62,10 +62,8 @@ class FavoritesViewController: UIViewController {
         setupLayout()
         favoritesTableView.delegate = self
         favoritesTableView.dataSource = self
-        if #available(iOS 11, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationItem.largeTitleDisplayMode = .always
-        }
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
 
     }
 

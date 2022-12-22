@@ -13,25 +13,25 @@ final class CoreDataManager {
     static let shared: CoreDataManager = CoreDataManager()
 
 
-    lazy var persistenContainer: NSPersistentContainer = {
-        let persistenContainer = NSPersistentContainer(name: "AppModel")
-        persistenContainer.loadPersistentStores { persisten, error in
+    lazy var persistentContainer: NSPersistentContainer = {
+        let persistentContainer = NSPersistentContainer(name: "AppModel")
+        persistentContainer.loadPersistentStores { persisten, error in
             if let error = error {
                 fatalError("Unable to load persistent stores: \(error)")
             }
         }
-        persistenContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        persistenContainer.viewContext.shouldDeleteInaccessibleFaults = true
-        persistenContainer.viewContext.automaticallyMergesChangesFromParent = true
-        return persistenContainer
+        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        persistentContainer.viewContext.shouldDeleteInaccessibleFaults = true
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+        return persistentContainer
     }()
 
     lazy var mainContext: NSManagedObjectContext = {
-        return persistenContainer.viewContext
+        return persistentContainer.viewContext
     }()
 
     lazy var backgroundContext: NSManagedObjectContext = {
-        return persistenContainer.newBackgroundContext()
+        return persistentContainer.newBackgroundContext()
     }()
 
 

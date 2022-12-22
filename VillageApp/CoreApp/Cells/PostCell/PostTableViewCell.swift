@@ -9,7 +9,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: ProfileCoordinator?
 
     private let coreData: CoreDataManager = CoreDataManager.shared
@@ -163,7 +163,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
     @objc private func deleteUserPost() {
-        presentor?.deleteUserPost(postId: arrayPosts[cellIndex].postId, completion: {
+        presenter?.deleteUserPost(postId: arrayPosts[cellIndex].postId, completion: {
             self.callback!()
         })
     }

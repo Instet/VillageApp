@@ -9,7 +9,7 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
 
-    var presentor: AppPresenterProtocol?
+    var presenter: AppPresenterProtocol?
     var coordinator: ProfileCoordinator?
     
     private let viewElements: ViewElements = ViewElements.shared
@@ -95,8 +95,8 @@ class PhotosTableViewCell: UITableViewCell, ViewAppProtocol {
     }
 
     @objc private func pushTap() {
-        guard let presentor = presentor else { return }
-        coordinator?.pushPhotoView(presentor: presentor)
+        guard let presenter = presenter else { return }
+        coordinator?.pushPhotoView(presenter: presenter)
         
     }
 
