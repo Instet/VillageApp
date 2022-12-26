@@ -192,6 +192,7 @@ extension ProfileViewController: UITableViewDataSource {
             postCell.presenter = presenter
             postCell.cellIndex = indexPath.row
             postCell.deletePostButton.isHidden = false
+            postCell.addInNoteButton.isHidden = true
             postCell.configCell(userPost: array![indexPath.row])
             postCell.callback = { [weak self] in
                 guard let self = self else { return }

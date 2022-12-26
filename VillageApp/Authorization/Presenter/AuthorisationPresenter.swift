@@ -109,10 +109,10 @@ final class AuthorisationPresenter: AuthorisationPresenterProtocol {
         var userDataForFirebase = userData
         userDataForFirebase.updateValue(AuthorisationPresenter.phoneNumber, forKey: "phone")
 
-
-        backendService.saveUser(dataUser: userDataForFirebase) {
-            UserDefaults.standard.set(true, forKey: "isRegistred")
+         backendService.saveUser(dataUser: userDataForFirebase) {
+                UserDefaults.standard.set(true, forKey: "isRegistred")
         }
+
         getUserData { user in
             self.coordinator?.startApp(user: user)
         }

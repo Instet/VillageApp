@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
 
     var presenter: AppPresenterProtocol?
     var arrayAllPosts: [Post]?
+    var user: User
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -32,8 +33,9 @@ class HomeViewController: UIViewController {
     }()
 
     // MARK: - Init
-    init(presenter: AppPresenterProtocol?) {
+    init(presenter: AppPresenterProtocol?, user: User) {
         self.presenter = presenter
+        self.user = user
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -107,6 +109,7 @@ extension HomeViewController: UITableViewDataSource {
         postCell.arrayPosts = arrayAllPosts ?? []
         postCell.cellIndex = indexPath.row
         postCell.configCell(userPost: arrayAllPosts![postCell.cellIndex])
+        postCell.idUser = user.id
         return postCell
     }
 

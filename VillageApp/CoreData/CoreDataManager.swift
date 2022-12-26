@@ -35,9 +35,9 @@ final class CoreDataManager {
     }()
 
 
-    func savePost(index: Int, postData: [Post]) {
+    func savePost(index: Int, postData: [Post], idUser: String) {
         let fetchRequest = PostModel.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "post == %@", postData[index].post )
+        fetchRequest.predicate = NSPredicate(format: "post == %@ AND idUser == %@", postData[index].post, idUser )
         do {
             let count = try backgroundContext.count(for: fetchRequest)
             if count > 0 {
@@ -51,7 +51,8 @@ final class CoreDataManager {
                     favoritPost.author = postData[index].author
                     favoritPost.post = postData[index].post
                     favoritPost.userPhone = postData[index].userPhone
-                    do{
+                    favoritPost.idUser = idUser
+                    do {
                         try self.backgroundContext.save()
                     } catch let error as NSError {
                         fatalError(error.localizedDescription)

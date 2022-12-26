@@ -15,6 +15,8 @@ class FavoritesViewController: UIViewController {
     private let coreData: CoreDataManager = CoreDataManager.shared
     private let viewElements: ViewElements = ViewElements.shared
 
+    var user: User
+
 
     private lazy var favoritesTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -28,7 +30,7 @@ class FavoritesViewController: UIViewController {
 
     private lazy var fetchResultController: NSFetchedResultsController<PostModel> = {
         let fetchRequest = PostModel.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "post", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "idUser", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         let resultController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                           managedObjectContext: coreData.mainContext,
@@ -40,9 +42,10 @@ class FavoritesViewController: UIViewController {
 
     // MARK: - Init
 
-    init(presenter: AppPresenterProtocol?, coordinator: CoordinatorViewController? ) {
+    init(presenter: AppPresenterProtocol?, coordinator: CoordinatorViewController?, user: User) {
         self.presenter = presenter
         self.coordinator = coordinator
+        self.user = user
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -83,7 +86,7 @@ class FavoritesViewController: UIViewController {
     }
 
     private func fetchFavoritPosts() {
-        fetchResultController.fetchRequest.predicate = nil
+        fetchResultController.fetchRequest.predicate = NSPredicate(format: "idUser == %@", user.id )
         coreData.mainContext.perform {
             do {
                 try self.fetchResultController.performFetch()

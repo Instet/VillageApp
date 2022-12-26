@@ -21,7 +21,9 @@ final class FirebaseService {
     func regUserByPhone(phoneNumber: String,
                         handler: @escaping (String) -> Void) {
         Auth.auth().languageCode = "ru"
-        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        // reCAPTCHA
+        Auth.auth().settings?.isAppVerificationDisabledForTesting = false
+
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
             guard error == nil else { print(error!.localizedDescription); return }
             guard let verificationID = verificationID else { return }

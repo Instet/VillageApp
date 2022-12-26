@@ -16,6 +16,7 @@ extension PostModel {
         return NSFetchRequest<PostModel>(entityName: "PostModel")
     }
 
+    @NSManaged public var idUser: String?
     @NSManaged public var author: String?
     @NSManaged public var post: String?
     @NSManaged public var userPhone: String?

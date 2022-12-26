@@ -52,10 +52,10 @@ final class MainTabBarController: UITabBarController {
             }
             let profileNC = profileCoordinator.start()
 
-            let homeCoordinator = HomeCoordinator()
+            let homeCoordinator = HomeCoordinator(user: user)
             let homeNC = homeCoordinator.start()
 
-            let favoritesCoordinator = FavoritesCoordinator()
+            let favoritesCoordinator = FavoritesCoordinator(user: user)
             let favoritesNC = favoritesCoordinator.start()
 
             guard let profileNC = profileNC,
@@ -65,6 +65,7 @@ final class MainTabBarController: UITabBarController {
             self.viewControllers = [
                 homeNC, profileNC, favoritesNC
             ]
+            self.tabBar.isHidden = false
             self.tabBar.tintColor = UIColor(.orange)
         case .coreAuth:
             let authCoordinator = AuthorizationCoordinator(navigationController: self.navigationController) { user in
@@ -78,8 +79,8 @@ final class MainTabBarController: UITabBarController {
             let firstNC = authCoordinator.start(coordinator: authCoordinator)
 
             guard let firstNC = firstNC else { return }
-            
             self.viewControllers = [firstNC]
+
         }
     }
 

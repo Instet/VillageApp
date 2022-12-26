@@ -76,7 +76,7 @@ final class AuthorizationCoordinator: AuthorizationCoordinatirProtocol {
         let presenter = AuthorisationPresenter(coordinator: self)
         let vc = UserDataViewController()
         vc.presenter = presenter
-        navigationController?.viewControllers = [vc]
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func startApp(user: User) {

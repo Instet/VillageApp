@@ -106,7 +106,7 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addRightTopButton()
+        addTopButton()
         birthdayTextField.delegate = self
         nameTextField.delegate = self
         lastNameTextField.delegate = self
@@ -267,19 +267,19 @@ class UserDataViewController: UIViewController, ViewAuthorisationProtocol {
 
 extension UserDataViewController {
 
-    private func addRightTopButton() {
+    private func addTopButton() {
         let buttonRight = UIBarButtonItem(image: UIImage(systemName: "checkmark")?.withTintColor(UIColor(.orange)!,
                                                                                             renderingMode: .alwaysOriginal),
                                      style: .plain,
                                      target: self,
                                      action: #selector(saveUserData))
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = buttonRight
+        self.navigationItem.rightBarButtonItem = buttonRight
         let buttonLeft = UIBarButtonItem(image: UIImage(systemName: "xmark")?.withTintColor(UIColor(.orange)!,
                                                                                             renderingMode: .alwaysOriginal),
                                          style: .done,
                                          target: self,
                                          action: #selector(cancelSaveUser))
-        navigationController?.navigationBar.topItem?.leftBarButtonItem = buttonLeft
+        self.navigationItem.leftBarButtonItem = buttonLeft
 
 
     }

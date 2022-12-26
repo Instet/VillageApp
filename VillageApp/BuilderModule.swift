@@ -28,14 +28,15 @@ final class BuilderModule {
 
         switch state {
         case .home:
-            let homeVC = HomeViewController(presenter: presenter)
+            guard let user = user else { return nil }
+            let homeVC = HomeViewController(presenter: presenter, user: user)
             let homeNC = UINavigationController(rootViewController: homeVC )
             homeNC.tabBarItem = UITabBarItem(title: StringKey.titleHome.localizedString(),
                                                  image: UIImage(.houseOrange),
                                                  selectedImage: UIImage(.houseOrange))
             return homeNC
         case .profile:
-            guard let user = user else { return nil}
+            guard let user = user else { return nil }
             let profileVC = ProfileViewController(presenter: presenter,
                                                   coordinator: coordinator as? ProfileCoordinator,
                                                   user: user)
@@ -45,8 +46,10 @@ final class BuilderModule {
                                                  selectedImage: UIImage(.user))
             return profileNC
         case .favorites:
+            guard let user = user else { return nil }
             let favoritesVC = FavoritesViewController(presenter: presenter,
-                                                      coordinator: coordinator as? FavoritesCoordinator)
+                                                      coordinator: coordinator as? FavoritesCoordinator,
+                                                      user: user)
             let favoritesNC = UINavigationController(rootViewController: favoritesVC)
             favoritesNC.tabBarItem = UITabBarItem(title: StringKey.titleFavorites.localizedString(),
                                                  image: UIImage(.like),

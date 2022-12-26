@@ -18,6 +18,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
     var arrayPosts = [Post]()
     var cellIndex: Int = 0
     var callback: (() -> ())?
+    var idUser: String = ""
 
 
     private let viewElements: ViewElements = ViewElements.shared
@@ -158,7 +159,7 @@ class PostTableViewCell: UITableViewCell, ViewAppProtocol {
 
     @objc private func addInNote() {
         // реализовать сохранение состояния кнопки
-        coreData.savePost(index: cellIndex, postData: arrayPosts)
+        coreData.savePost(index: cellIndex, postData: arrayPosts, idUser: idUser)
 
     }
 
